@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Chọn Bộ Flashcard Kiểm Tra</h2>
+<form method="post" action="{{ url_for('test_select') }}" autocomplete="off">
+    <label for="big_deck">Chọn Khóa Lớn:</label>
+    <select id="big_deck" name="big_deck" style="font-size:1.2em; width:100%;">
+        <option value="all">Tất cả</option>
+        {% for deck in decks %}
+            <option value="{{ deck.big_deck }}">{{ deck.big_deck }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+    <label for="sub_deck">Chọn Khóa Nhỏ:</label>
+    <select id="sub_deck" name="sub_deck" style="font-size:1.2em; width:100%;">
+        <option value="all">Tất cả</option>
+    </select>
+    <br><br>
+    <label for="num_questions">Số câu hỏi:</label>
+    <input type="number" id="num_questions" name="num_questions" min="1" value="5" style="font-size:1.2em; width:100%;">
+    <br><br>
+    <button type="submit" style="font-size:1.2em; padding:10px; width:100%;">Bắt đầu Kiểm Tra</button>
+</form>
+<script>
+  const bigDeckSelect = document.getElementById('big_deck');
+  const subDeckSelect = document.getElementById('sub_deck');
+
+  bigDeckSelect.addEventListener('change', function() {
+      const selectedBig = this.value;
+      if(selectedBig === "all") {
+          subDeckSelect.innerHTML = '<option value="all">Tất cả</option>';
+      } else {
+          fetch(`/get_subdecks?big_deck=${encodeURIComponent(selectedBig)}`)
+            .then(response => response.json())
+            .then(data => {
+                let options = '<option value="all">Tất cả</option>';
+                data.subdecks.forEach(function(sub) {
+                    options += `<option value="${sub}">${sub}</option>`;
+                });
+                subDeckSelect.innerHTML = options;
+            })
+            .catch(err => console.error(err));
+      }
+  });
+</script>
+{% endblock %}

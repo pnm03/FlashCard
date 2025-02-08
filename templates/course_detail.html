@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Khóa học: {{ big_deck }} / {{ sub_deck }}</h2>
+<a href="{{ url_for('add_flashcard', big_deck=big_deck, sub_deck=sub_deck) }}" class="btn">+ Thêm Flashcard mới</a>
+<button id="toggleList" class="btn">Thu gọn/Hiện danh sách</button>
+<div id="flashcardList">
+    {% if cards %}
+        <ul>
+        {% for card in cards %}
+            <li class="flashcard-item">
+                <div class="flashcard-header">
+                    <strong>{{ card.english }}</strong>{% if card.ipa %} (IPA: {{ card.ipa }}){% endif %}
+                    <div class="actions">
+                        <a href="{{ url_for('edit_flashcard', big_deck=big_deck, sub_deck=sub_deck, card_index=loop.index0) }}">Chỉnh sửa</a>
+                        <form method="post" action="{{ url_for('delete_flashcard', big_deck=big_deck, sub_deck=sub_deck, card_index=loop.index0) }}" onsubmit="return confirm('Bạn có chắc chắn xóa flashcard này?');" style="display:inline;">
+                            <button type="submit">Xóa</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="flashcard-body">
+                    {% if card.description %}
+                        <p>Mô tả: {{ card.description }}</p>
+                    {% endif %}
+                    <p><em>Định nghĩa:</em> {{ card.definitions | join(', ') }}</p>
+                    {% if card.image %}
+                        <img src="{{ card.image }}" alt="{{ card.english }}" style="max-width:150px;">
+                    {% endif %}
+                    <div class="audio-controls">
+                        {% if card.audio_auto %}
+                            <audio controls style="max-width:150px;">
+                                <source src="{{ card.audio_auto }}" type="audio/mpeg">
+                                Trình duyệt không hỗ trợ.
+                            </audio>
+                        {% endif %}
+                        {% if card.audio_user %}
+                            <audio controls style="max-width:150px;">
+                                <source src="{{ card.audio_user }}" type="audio/mpeg">
+                                Trình duyệt không hỗ trợ.
+                            </audio>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Chưa có flashcard nào trong khóa này.</p>
+    {% endif %}
+</div>
+<script>
+    const toggleBtn = document.getElementById('toggleList');
+    const flashcardList = document.getElementById('flashcardList');
+    toggleBtn.addEventListener('click', function() {
+        flashcardList.style.display = (flashcardList.style.display === "none") ? "block" : "none";
+    });
+</script>
+{% endblock %}

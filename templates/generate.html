@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Sinh Flashcard theo Chủ Đề (AI)</h2>
+<form method="post" action="{{ url_for('generate') }}" autocomplete="off">
+    <label for="topic">Chủ đề:</label>
+    <input type="text" id="topic" name="topic" required style="font-size:1.2em; width:100%;">
+    <br><br>
+    <label for="description">Mô tả:</label>
+    <textarea id="description" name="description" rows="3" required style="font-size:1.2em; width:100%;"></textarea>
+    <br><br>
+    <label for="count">Số từ cần sinh:</label>
+    <input type="number" id="count" name="count" min="1" value="5" required style="font-size:1.2em; width:100%;">
+    <br><br>
+    <button type="submit" style="font-size:1.2em; padding:10px; width:100%;">Sinh Flashcard</button>
+</form>
+{% endblock %}

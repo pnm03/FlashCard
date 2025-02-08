@@ -1,0 +1,270 @@
+{
+    "big_decks": {
+        "Toeic": {
+            "name": "Toeic",
+            "subdecks": {
+                "Activities of eye": {
+                    "name": "Activities of eye",
+                    "cards": [
+                        {
+                            "english": "examine",
+                            "definitions": [
+                                "kiểm tra"
+                            ],
+                            "image": "",
+                            "description": "",
+                            "ipa": "ɪgˈzæmɪn",
+                            "audio_auto": "/static/uploads/audio/examine.mp3?v=61353",
+                            "audio_user": "",
+                            "mistake_count": 2
+                        },
+                        {
+                            "english": "glane",
+                            "definitions": [
+                                "nhìn lén"
+                            ],
+                            "image": "None",
+                            "description": "",
+                            "ipa": "glane",
+                            "audio_auto": "/static/uploads/audio/glane.mp3?v=42383",
+                            "audio_user": "",
+                            "mistake_count": 1
+                        },
+                        {
+                            "english": "scan",
+                            "definitions": [
+                                "nhìn lướt",
+                                "đọc lướt"
+                            ],
+                            "image": "None",
+                            "description": "",
+                            "ipa": "skæn",
+                            "audio_auto": "/static/uploads/audio/scan.mp3?v=4336",
+                            "audio_user": "",
+                            "mistake_count": 1
+                        },
+                        {
+                            "english": "gaze",
+                            "definitions": [
+                                "nhìn chằm chằm",
+                                "nhìn ngắm"
+                            ],
+                            "image": "None",
+                            "description": "",
+                            "ipa": "geɪz",
+                            "audio_auto": "/static/uploads/audio/gaze.mp3?v=65837",
+                            "audio_user": ""
+                        }
+                    ]
+                }
+            }
+        },
+        "Test": {
+            "subdecks": {
+                "a": {
+                    "cards": [
+                        {
+                            "english": "Hello",
+                            "description": "abc",
+                            "definitions": [
+                                "hoihi"
+                            ],
+                            "ipa": "hɛˈloʊ",
+                            "image": "/static/uploads/unnamed.jpg",
+                            "mistake_count": 3
+                        }
+                    ]
+                },
+                "Test1": {
+                    "cards": [
+                        {
+                            "english": "your",
+                            "description": "",
+                            "definitions": [
+                                "bạn"
+                            ],
+                            "ipa": "jʊr",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/your.mp3?v=37647",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        }
+                    ]
+                }
+            }
+        },
+        "AA": {
+            "subdecks": {
+                "AAA": {
+                    "cards": [
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_1.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_1"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_1",
+                            "english": "Hoạt động của tay_word_1",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_1*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_2.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_2"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_2",
+                            "english": "Hoạt động của tay_word_2",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_2*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_3.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_3"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_3",
+                            "english": "Hoạt động của tay_word_3",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_3*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_4.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_4"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_4",
+                            "english": "Hoạt động của tay_word_4",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_4*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_5.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_5"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_5",
+                            "english": "Hoạt động của tay_word_5",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_5*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_6.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_6"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_6",
+                            "english": "Hoạt động của tay_word_6",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_6*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_7.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_7"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_7",
+                            "english": "Hoạt động của tay_word_7",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_7*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_8.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_8"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_8",
+                            "english": "Hoạt động của tay_word_8",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_8*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_9.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_9"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_9",
+                            "english": "Hoạt động của tay_word_9",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_9*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_10.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_10"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_10",
+                            "english": "Hoạt động của tay_word_10",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_10*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_11.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_11"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_11",
+                            "english": "Hoạt động của tay_word_11",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_11*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_12.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_12"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_12",
+                            "english": "Hoạt động của tay_word_12",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_12*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_13.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_13"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_13",
+                            "english": "Hoạt động của tay_word_13",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_13*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_14.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_14"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_14",
+                            "english": "Hoạt động của tay_word_14",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_14*"
+                        },
+                        {
+                            "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_15.mp3",
+                            "audio_user": "",
+                            "definitions": [
+                                "Định nghĩa cho Hoạt động của tay_word_15"
+                            ],
+                            "description": "Mô tả cho Hoạt động của tay_word_15",
+                            "english": "Hoạt động của tay_word_15",
+                            "image": "",
+                            "ipa": "hoạt* độđộng* của* tay_word_15*"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

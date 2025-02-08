@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Kết quả Sinh Flashcard (AI)</h2>
+<form method="post" action="{{ url_for('generate_result') }}" autocomplete="off">
+    <p>Chọn các flashcard bạn muốn thêm (mặc định chọn tất cả):</p>
+    {% for card in generated %}
+      <div style="border:1px solid #ccc; padding:5px; margin-bottom:5px;">
+         <input type="checkbox" name="selected" value="{{ loop.index0 }}" checked>
+         <strong>{{ card.english }}</strong> - {{ card.description }}<br>
+         <em>Định nghĩa:</em> {{ card.definitions | join(', ') }}<br>
+         <em>IPA:</em> {{ card.ipa }}
+      </div>
+    {% endfor %}
+    <br>
+    <label for="big_deck">Nhập tên Khóa Lớn để lưu:</label>
+    <input type="text" id="big_deck" name="big_deck" required style="font-size:1.2em; width:100%;" autocomplete="off">
+    <br><br>
+    <label for="sub_deck">Nhập tên Khóa Nhỏ để lưu:</label>
+    <input type="text" id="sub_deck" name="sub_deck" required style="font-size:1.2em; width:100%;" autocomplete="off">
+    <br><br>
+    <button type="submit" style="font-size:1.2em; padding:10px; width:100%;">Lưu Flashcard</button>
+</form>
+{% endblock %}

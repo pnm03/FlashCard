@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Kết quả Kiểm Tra</h2>
+<p>Bạn đạt được {{ score }} trên tổng số {{ total }} câu hỏi.</p>
+<a href="{{ url_for('index') }}">Quay lại Trang Chủ</a>
+{% endblock %}

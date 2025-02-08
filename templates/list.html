@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Danh Sách Khóa Học</h2>
+{% if decks %}
+    <ul>
+    {% for big_deck, bd_data in decks.items() %}
+        <li>
+            <strong>{{ big_deck }}</strong>
+            {% if bd_data.subdecks %}
+            <ul>
+                {% for sub_deck, sub_data in bd_data.subdecks.items() %}
+                    <li>
+                        <a href="{{ url_for('course_detail', big_deck=big_deck, sub_deck=sub_deck) }}">
+                            {{ sub_deck }} ({{ sub_data.cards | length }} flashcards)
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Chưa có khóa học nào.</p>
+{% endif %}
+{% endblock %}

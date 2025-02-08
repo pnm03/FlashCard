@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Lịch Học Đã Tạo</h2>
+<p>Chủ đề: {{ topic }}</p>
+<p>Phương thức: {{ mode }}</p>
+<h3>Lịch học:</h3>
+<ul>
+    {% for slot in schedule %}
+        <li>{{ slot }}</li>
+    {% endfor %}
+</ul>
+<a href="{{ url_for('reminder') }}" class="btn">Tạo lại lịch học</a>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ action }} Flashcard trong khóa: {{ big_deck }} / {{ sub_deck }}</h2>
+<form method="post" action="" enctype="multipart/form-data" autocomplete="off">
+    <label for="english">Từ Tiếng Anh:</label>
+    <input type="text" id="english" name="english" value="{{ card.english if card }}" required style="font-size:1.2em; width:100%;" autocomplete="off">
+    <br><br>
+    <label for="ipa">Phiên Âm IPA:</label>
+    <input type="text" id="ipa" name="ipa" value="{{ card.ipa if card }}" placeholder="Nếu để trống, tự động điền" style="font-size:1.2em; width:100%;" autocomplete="off">
+    <br><br>
+    <label for="description">Mô tả:</label>
+    <textarea id="description" name="description" rows="3" style="font-size:1.2em; width:100%;" autocomplete="off">{{ card.description if card }}</textarea>
+    <br><br>
+    <label for="definitions">Định nghĩa (mỗi dòng một định nghĩa):</label>
+    <textarea id="definitions" name="definitions" rows="4" required style="font-size:1.2em; width:100%;" autocomplete="off">{% if card %}{{ card.definitions | join('\n') }}{% endif %}</textarea>
+    <br><br>
+    <label for="image_file">Chọn ảnh từ máy:</label>
+    <input type="file" id="image_file" name="image_file" accept="image/*" style="font-size:1.2em; width:100%;">
+    <br><br>
+    <label for="image">Hoặc nhập URL ảnh:</label>
+    <input type="text" id="image" name="image" value="{{ card.image if card }}" style="font-size:1.2em; width:100%;" autocomplete="off">
+    <button type="button" id="gen-image-btn">Tự sinh hình ảnh</button>
+    <br><br>
+    <label for="audio_file">Chọn file ghi âm (hoặc ghi âm trực tiếp):</label>
+    <input type="file" id="audio_file" name="audio_file" accept="audio/*" style="font-size:1.2em; width:100%;">
+    <br><br>
+    <!-- Ghi âm trực tiếp -->
+    <div id="recording-section">
+      <p id="recording-status" style="color: red; display: none;">Đang ghi âm...</p>
+      <button type="button" id="start-record">Bắt đầu Ghi âm</button>
+      <button type="button" id="stop-record" disabled>Dừng Ghi âm</button>
+      <button type="button" id="clear-record" style="display:none;">X</button>
+      <audio id="recorded-audio" controls style="display:none; margin-top:10px;"></audio>
+      <input type="hidden" id="audio_blob" name="audio_blob">
+    </div>
+    <br>
+    <button type="submit" style="font-size:1.2em; padding:10px; width:100%;">{{ action }} Flashcard</button>
+</form>
+<script>
+    // Nút tự sinh hình ảnh
+    const genImageBtn = document.getElementById('gen-image-btn');
+    genImageBtn.addEventListener('click', () => {
+        const word = document.getElementById('english').value.trim();
+        if (!word) return;
+        fetch(`/generate_image?word=${encodeURIComponent(word)}`)
+          .then(response => response.json())
+          .then(data => {
+              if(data.image) {
+                  document.getElementById('image').value = data.image;
+              } else {
+                  console.error("Lỗi sinh hình ảnh:", data.error);
+              }
+          })
+          .catch(err => console.error(err));
+    });
+
+    // Ghi âm trực tiếp
+    let mediaRecorder;
+    let audioChunks = [];
+    const startRecordBtn = document.getElementById('start-record');
+    const stopRecordBtn = document.getElementById('stop-record');
+    const clearRecordBtn = document.getElementById('clear-record');
+    const recordedAudio = document.getElementById('recorded-audio');
+    const audioBlobInput = document.getElementById('audio_blob');
+    const recordingStatus = document.getElementById('recording-status');
+
+    startRecordBtn.addEventListener('click', () => {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+          .then(stream => {
+              mediaRecorder = new MediaRecorder(stream);
+              mediaRecorder.start();
+              recordingStatus.textContent = "Đang ghi âm...";
+              recordingStatus.style.display = "block";
+              audioChunks = [];
+              mediaRecorder.addEventListener("dataavailable", event => {
+                  audioChunks.push(event.data);
+              });
+              mediaRecorder.addEventListener("stop", () => {
+                  const audioBlob = new Blob(audioChunks, { type: 'audio/mpeg' });
+                  const reader = new FileReader();
+                  reader.readAsDataURL(audioBlob);
+                  reader.onloadend = function() {
+                      audioBlobInput.value = reader.result;
+                      recordedAudio.src = reader.result;
+                      recordedAudio.style.display = "block";
+                      recordingStatus.style.display = "none";
+                      clearRecordBtn.style.display = "inline-block";
+                  }
+              });
+              startRecordBtn.disabled = true;
+              stopRecordBtn.disabled = false;
+          })
+          .catch(err => {
+              console.error("Không thể ghi âm: ", err);
+          });
+    });
+
+    stopRecordBtn.addEventListener('click', () => {
+        mediaRecorder.stop();
+        startRecordBtn.disabled = false;
+        stopRecordBtn.disabled = true;
+    });
+
+    clearRecordBtn.addEventListener('click', () => {
+        recordedAudio.src = "";
+        recordedAudio.style.display = "none";
+        audioBlobInput.value = "";
+        clearRecordBtn.style.display = "none";
+    });
+</script>
+{% endblock %}

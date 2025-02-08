@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Tạo Nhắc Nhở Học Tập</h2>
+<div>
+    <h3>Tạo lịch học thủ công</h3>
+    <form method="post" action="{{ url_for('reminder') }}" autocomplete="off">
+        <input type="hidden" name="mode" value="manual">
+        <label for="topic">Chủ đề học:</label>
+        <input type="text" id="topic" name="topic" required style="font-size:1.2em; width:100%;">
+        <br><br>
+        <label for="start_time">Thời gian bắt đầu (HH:MM):</label>
+        <input type="time" id="start_time" name="start_time" required style="font-size:1.2em; width:100%;">
+        <br><br>
+        <label for="duration">Thời lượng học (phút):</label>
+        <input type="number" id="duration" name="duration" required style="font-size:1.2em; width:100%;">
+        <br><br>
+        <label for="schedule">Nhập lịch học (mỗi dòng một khung giờ, ví dụ: 08:00 - 09:00):</label>
+        <textarea id="schedule" name="schedule" rows="4" style="font-size:1.2em; width:100%;"></textarea>
+        <br><br>
+        <button type="submit" style="font-size:1.2em; padding:10px; width:100%;">Lưu lịch học</button>
+    </form>
+    <hr>
+    <h3>Tạo lịch học bằng AI</h3>
+    <form method="post" action="{{ url_for('reminder') }}" autocomplete="off">
+        <input type="hidden" name="mode" value="ai">
+        <label for="topic_ai">Chủ đề học:</label>
+        <input type="text" id="topic_ai" name="topic" required style="font-size:1.2em; width:100%;">
+        <br><br>
+        <button type="submit" style="font-size:1.2em; padding:10px; width:100%;">Tạo lịch học theo AI</button>
+    </form>
+</div>
+{% endblock %}

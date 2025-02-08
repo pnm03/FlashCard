@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="menu">
+    <h2>Chào mừng đến với Flashcard App</h2>
+    <ul>
+        <li><a href="{{ url_for('create') }}">Tạo Flashcard</a></li>
+        <li><a href="{{ url_for('test_select') }}">Kiểm tra Flashcard</a></li>
+        <li><a href="{{ url_for('list_courses') }}">Danh sách khóa học</a></li>
+        <li><a href="{{ url_for('generate') }}">Sinh Flashcard (AI)</a></li>
+    </ul>
+</div>
+{% endblock %}
