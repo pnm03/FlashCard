@@ -141,3 +141,14 @@ body {
      cursor: pointer;
  }
  
+
+ @media (max-width: 768px) {
+    .container {
+      width: 95%;
+      padding: 10px;
+    }
+    h1, h2, p {
+      font-size: 1.1em;
+    }
+  }
+

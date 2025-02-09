@@ -1,41 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Kiểm Tra Flashcard (Câu {{ current }} của {{ total }})</h2>
-<div class="question">
-    <p>{{ question | safe }}</p>
-    {% if show_audio %}
-      {% if card.image %}
-          <img src="{{ card.image }}" alt="{{ card.english }}" style="max-width:150px; margin-top:10px;">
-      {% endif %}
-      <div class="audio-controls" style="margin-top:10px;">
+<div class="container" style="max-width: 500px; margin: 0 auto; text-align: center;">
+  <h2>Kiểm Tra Flashcard (Câu {{ current }} của {{ total }})</h2>
+  <div class="question mb-3">
+      <p>{{ question | safe }}</p>
+      {% if show_audio %}
+        {% if card.image %}
+          <img src="{{ card.image }}" alt="{{ card.english }}" class="img-fluid my-2" style="max-width:150px;">
+        {% endif %}
+        <div class="audio-controls my-2">
           {% if card.audio_auto %}
-              <audio controls style="max-width:150px;">
-                  <source src="{{ card.audio_auto }}" type="audio/mpeg">
-                  Trình duyệt không hỗ trợ.
-              </audio>
+            <audio controls style="max-width:150px;" class="d-block mx-auto">
+              <source src="{{ card.audio_auto }}" type="audio/mpeg">
+              Trình duyệt không hỗ trợ.
+            </audio>
           {% endif %}
           {% if card.audio_user %}
-              <audio controls style="max-width:150px;">
-                  <source src="{{ card.audio_user }}" type="audio/mpeg">
-                  Trình duyệt không hỗ trợ.
-              </audio>
+            <audio controls style="max-width:150px;" class="d-block mx-auto">
+              <source src="{{ card.audio_user }}" type="audio/mpeg">
+              Trình duyệt không hỗ trợ.
+            </audio>
           {% endif %}
+        </div>
+      {% endif %}
+      {% if hint %}
+        <p class="hint alert alert-warning">Gợi ý: {{ hint }}</p>
+      {% endif %}
+  </div>
+  <form method="post" action="{{ url_for('test') }}" autocomplete="off">
+      <div class="form-group">
+          <label for="answer">Đáp án:</label>
+          <input type="text" id="answer" name="answer" class="form-control" autocomplete="off" style="font-size:1.5em;" autofocus>
       </div>
-    {% endif %}
-    {% if hint %}
-      <p class="hint">Gợi ý: {{ hint }}</p>
-    {% endif %}
+      <button type="submit" class="btn btn-primary btn-block" style="font-size:1.2em;">Gửi</button>
+  </form>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("answer").focus();
+    });
+  </script>
 </div>
-<form method="post" action="{{ url_for('test') }}" autocomplete="off">
-    <label for="answer">Đáp án:</label>
-    <input type="text" id="answer" name="answer" autocomplete="off" style="font-size:1.5em; width:100%; padding:10px;">
-    <br><br>
-    <button type="submit" style="font-size:1.2em; padding:10px; width:100%;">Gửi</button>
-</form>
-
-<script>
-     document.addEventListener("DOMContentLoaded", function() {
-       document.getElementById("answer").focus();
-     });
-   </script>
 {% endblock %}
