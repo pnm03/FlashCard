@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="max-width: 500px; margin: 0 auto; text-align: center;">
+  <h2>Luyện tập Flashcard</h2>
+  <p style="font-size: 1.2em;">Flashcard {{ current }} / {{ total }}</p>
+
+  {# Hiển thị flash messages nếu có #}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="messages" style="margin-bottom: 15px;">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}" style="padding: 8px; margin-bottom: 5px; border-radius: 5px; 
+               {% if category=='success' %}background-color: #d4edda; color: #155724;
+               {% else %}background-color: #f8d7da; color: #721c24;{% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {# Flashcard với hiệu ứng flip #}
+  <div class="card" style="width: 350px; height: 300px; perspective: 1000px; margin: 0 auto; cursor: pointer;" onclick="flipCard()">
+    <div class="card-inner" style="position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; transform-origin: center center; will-change: transform;">
+      
+      {% if mode == 1 %}
+        {# Mode 1: Mặt trước hiển thị tiếng Anh, mặt sau hiển thị định nghĩa #}
+        <div class="card-face card-front" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;
+             backface-visibility: hidden; border: 1px solid #ccc; border-radius: 10px;
+             background-color: #f9f9f9; padding: 10px; text-align: center; display: flex;
+             flex-direction: column; justify-content: center; align-items: center;">
+          <p style="font-size: 1.3em; margin-bottom: 0;">Từ tiếng Anh:</p>
+          <p style="margin-bottom: 5px; font-size: 1.3em;"><strong>{{ front }}</strong></p>
+          {% if additional.ipa %}
+            <p style="font-size: 1.1em;"> /{{ additional.ipa }}/</p>
+          {% endif %}
+          {% if additional.audio %}
+            <audio controls style="width: 100%; margin-bottom: 5px;" src="{{ additional.audio }}"></audio>
+          {% endif %}
+          {% if additional.audio_user %}
+            <audio controls style="width: 100%; margin-bottom: 5px;" src="{{ additional.audio_user }}"></audio>
+          {% endif %}
+        </div>
+        <div class="card-face card-back" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;
+             backface-visibility: hidden; border: 1px solid #ccc; border-radius: 10px;
+             background-color: #e9ecef; transform: rotateY(180deg); padding: 10px; text-align: center;
+             display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <p style="font-size: 1.3em; margin-bottom: 0;">Định nghĩa:</p>
+          <p style="margin-bottom: 5px; font-size: 1.3em;"><strong>{{ additional.definitions }}</strong></p>
+          <br>
+          {% if additional.image %}
+            <img src="{{ additional.image }}" alt="Flashcard image" style="max-width: 30%; border-radius: 5px;">
+          {% endif %}
+        </div>
+      {% else %}
+        {# Mode 2: Mặt trước hiển thị định nghĩa, mặt sau hiển thị tiếng Anh #}
+        <div class="card-face card-front" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;
+             backface-visibility: hidden; border: 1px solid #ccc; border-radius: 10px;
+             background-color: #f9f9f9; padding: 10px; text-align: center; display: flex;
+             flex-direction: column; justify-content: center; align-items: center;">
+          <p style="font-size: 1.3em; margin-bottom: 0;">Định nghĩa:</p>
+          <p style="margin-bottom: 5px; font-size: 1.3em;"><strong>{{ additional.definitions }}</strong></p>
+          <br>
+          {% if additional.image %}
+            <img src="{{ additional.image }}" alt="Flashcard image" style="max-width: 30%; border-radius: 5px;">
+          {% endif %}
+        </div>
+        <div class="card-face card-back" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;
+             backface-visibility: hidden; border: 1px solid #ccc; border-radius: 10px;
+             background-color: #e9ecef; transform: rotateY(180deg); padding: 10px; text-align: center;
+             display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <p style="font-size: 1.3em; margin-bottom: 0;">Từ tiếng Anh:</p>
+          <p style="margin-bottom: 5px; font-size: 1.3em;"><strong>{{ additional.english }}</strong></p>
+          {% if additional.ipa %}
+            <p style="font-size: 1.1em;">/{{ additional.ipa }}/</p>
+          {% endif %}
+          {% if additional.audio %}
+            <audio controls style="width: 100%; margin-bottom: 5px;" src="{{ additional.audio }}"></audio>
+          {% endif %}
+          {% if additional.audio_user %}
+            <audio controls style="width: 100%; margin-bottom: 5px;" src="{{ additional.audio_user }}"></audio>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+  {# Form nhập câu trả lời (ô input và nút theo thứ tự dọc) #}
+  <br><br>
+  <form method="post" style="margin-top: 20px; max-width: 350px; margin: 0 auto;">
+      <input type="text" name="answer" placeholder="Nhập câu trả lời..." 
+             style="font-size: 1.4em; padding: 12px; width: 100%; box-sizing: border-box; border: 2px solid #ccc; border-radius: 5px;"
+             autocomplete="off" autofocus>
+      <br><br>
+      <button type="submit" 
+              style="width: 100%; box-sizing: border-box; padding: 10px 20px; font-size: 1.4em; background-color: #28a745; color: white; border: none; border-radius: 5px;">
+        Kiểm Tra
+      </button>
+  </form>
+  
+  {# Nút điều hướng với khoảng cách hợp lý #}
+  <div style="margin-top: 15px; display: flex; justify-content: space-between; max-width: 350px; margin: 30px auto 30px auto;">
+    <a id="btn-prev" href="{{ url_for('practice_navigate', direction='prev') }}" style="font-size: 1.4em; text-decoration: none; padding: 10px; background-color: #007bff; color: white; border-radius: 5px; display: inline-block; width: 45%; text-align: center;">
+       &#8592; Quay lại
+    </a>
+    <a id="btn-next" href="{{ url_for('practice_navigate', direction='next') }}" style="font-size: 1.4em; text-decoration: none; padding: 10px; background-color: #007bff; color: white; border-radius: 5px; display: inline-block; width: 45%; text-align: center;">
+       Tiếp theo &#8594;
+    </a>
+  </div>
+</div>
+
+<script>
+// Hàm flip card: thêm/bớt class "flipped" để xoay card
+function flipCard() {
+  const card = document.querySelector('.card');
+  card.classList.toggle('flipped');
+}
+
+// Sau khi trang load, ô nhập luôn nhận focus
+window.onload = function() {
+  const answerInput = document.querySelector('input[name="answer"]');
+  if(answerInput) answerInput.focus();
+};
+
+// Lắng nghe sự kiện bàn phím cho phím mũi tên trái và phải
+document.addEventListener('keydown', function(event) {
+  if(event.key === 'ArrowLeft') {
+    event.preventDefault();
+    const prevButton = document.getElementById('btn-prev');
+    if(prevButton) prevButton.click();
+  }
+  if(event.key === 'ArrowRight') {
+    event.preventDefault();
+    const nextButton = document.getElementById('btn-next');
+    if(nextButton) nextButton.click();
+  }
+});
+</script>
+<style>
+/* CSS cho hiệu ứng flip */
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+</style>
+{% endblock %}

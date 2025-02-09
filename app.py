@@ -212,7 +212,12 @@ def create():
         data[big_deck]["subdecks"][sub_deck]["cards"].append(card)
         save_data(data)
         flash("Flashcard đã được tạo thành công!", "success")
-        return redirect(url_for('create'))
+        return redirect(url_for('create',
+                        existing_big_deck=existing_big,
+                        new_big_deck=new_big,
+                        existing_sub_deck=existing_sub,
+                        new_sub_deck=new_sub))
+
     return render_template('create.html', big_decks=load_data())
 
 @app.route('/flashcard/add/<big_deck>/<sub_deck>', methods=['GET', 'POST'])
@@ -538,5 +543,184 @@ def reset():
     session.pop('test', None)
     return redirect(url_for('test_select'))
 
+# --- Route: Lựa chọn luyện tập ---
+@app.route('/practice/select', methods=['GET', 'POST'])
+def practice_select():
+    data = load_data()
+    # Tạo danh sách decks: mỗi phần tử là dict với key "big_deck" và "subdecks"
+    decks = []
+    for big_deck, bd_data in data.items():
+        subdecks = list(bd_data.get("subdecks", {}).keys())
+        decks.append({"big_deck": big_deck, "subdecks": subdecks})
+
+    if request.method == 'POST':
+        # Lấy dữ liệu từ form
+        selected_big = request.form.get('big_deck')
+        selected_sub = request.form.get('sub_deck')
+        try:
+            num_questions = int(request.form.get('num_questions'))
+        except:
+            num_questions = 5
+
+        flashcards = []
+        # Nếu người dùng chọn "all" cho khóa lớn, lấy tất cả flashcard của mọi khóa
+        if selected_big == "all":
+            for bd, bd_data in data.items():
+                for sd, sd_data in bd_data.get("subdecks", {}).items():
+                    for card in sd_data.get("cards", []):
+                        flashcards.append({
+                            "big_deck": bd,
+                            "sub_deck": sd,
+                            "card": card
+                        })
+        else:
+            bd_data = data.get(selected_big, {})
+            # Nếu người dùng chọn "all" cho khóa nhỏ, lấy tất cả flashcard của khóa lớn đó
+            if selected_sub == "all":
+                for sd, sd_data in bd_data.get("subdecks", {}).items():
+                    for card in sd_data.get("cards", []):
+                        flashcards.append({
+                            "big_deck": selected_big,
+                            "sub_deck": sd,
+                            "card": card
+                        })
+            else:
+                # Nếu đã chọn cụ thể một khóa nhỏ
+                for card in bd_data.get("subdecks", {}).get(selected_sub, {}).get("cards", []):
+                    flashcards.append({
+                        "big_deck": selected_big,
+                        "sub_deck": selected_sub,
+                        "card": card
+                    })
+
+        if not flashcards:
+            flash("Không tìm thấy flashcard cho bộ đã chọn.", "danger")
+            return redirect(url_for('practice_select'))
+
+        # Gán id duy nhất cho mỗi flashcard để theo dõi số lần sử dụng
+        for idx, item in enumerate(flashcards):
+            item['id'] = idx
+
+        questions = []
+        card_usage = {}  # theo dõi số lần flashcard đã được dùng (dựa trên id)
+
+        # Lựa chọn ngẫu nhiên flashcard dựa trên mistake_count (nếu không có, mặc định là 0)
+        while len(questions) < num_questions:
+            eligible = [item for item in flashcards if card_usage.get(item['id'], 0) < 2]
+            if not eligible:
+                break  # Không còn flashcard đủ điều kiện
+            weights = [item['card'].get('mistake_count', 0) + 1 for item in eligible]
+            chosen = random.choices(eligible, weights=weights, k=1)[0]
+            card_usage[chosen['id']] = card_usage.get(chosen['id'], 0) + 1
+            mode = random.choice([1, 2])
+            questions.append({
+                "big_deck": chosen["big_deck"],
+                "sub_deck": chosen["sub_deck"],
+                "card": chosen["card"],
+                "mode": mode,
+                "attempt": 0
+            })
+
+        # Lưu phiên luyện tập vào session với key "practice"
+        session['practice'] = {"questions": questions, "current": 0, "score": 0, "total": len(questions)}
+        return redirect(url_for('practice'))
+
+    # Với GET, render template practice_select.html và truyền danh sách decks
+    return render_template('practice_select.html', decks=decks)
+
+
+# --- Route: Luyện tập (hiển thị một flashcard) ---
+# --- Route: Luyện tập (hiển thị một flashcard) ---
+@app.route('/practice', methods=['GET', 'POST'])
+def practice():
+    practice_session = session.get('practice')
+    if not practice_session or practice_session.get('total', 0) == 0:
+        flash("Không có flashcard luyện tập.", "danger")
+        return redirect(url_for('practice_select'))
+
+    # Đảm bảo sử dụng đúng key
+    cards = practice_session["questions"]
+    current_index = practice_session["current"]
+
+    # Nếu đã luyện tập hết
+    if current_index >= len(cards):
+        flash("Luyện tập hoàn thành!", "success")
+        session.pop('practice')
+        return redirect(url_for('list_courses'))
+
+    current_item = cards[current_index]
+    card = current_item["card"]
+    mode = current_item["mode"]
+
+    # Xác định nội dung hiển thị dựa trên mode
+    if mode == 1:
+        # Mode 1: Hiển thị từ tiếng Anh, đáp án là định nghĩa
+        front_content = card.get("english", "")
+        answer = card.get("definitions", [""])[0]
+        additional = {
+            "ipa": card.get("ipa", ""),
+            "audio": card.get("audio_auto", ""),
+            "audio_user": card.get("audio_user", ""),
+            "image": card.get("image", ""),
+            "english": card.get("english", ""),
+            "definitions": card.get("definitions", [""])[0]
+        }
+    else:
+        # Mode 2: Hiển thị định nghĩa, đáp án là từ tiếng Anh
+        front_content = card.get("definitions", [""])[0]
+        answer = card.get("english", "")
+        additional = {
+            "ipa": card.get("ipa", ""),
+            "audio": card.get("audio_auto", ""),
+            "image": card.get("image", ""),
+            "audio_user": card.get("audio_user", ""),
+            "english": card.get("english", ""),
+            "definitions": card.get("definitions", [""])[0]
+        }
+
+    if request.method == "POST":
+        user_answer = request.form.get("answer", "").strip()
+        if check_answer(user_answer, [answer]):
+            flash("Chính xác!", "success")
+        else:
+            flash(f"Sai! Đáp án đúng: {answer}", "danger")
+
+        # Sau khi trả lời, chuyển sang card kế tiếp
+        practice_session["current"] = current_index + 1
+        session['practice'] = practice_session
+        return redirect(url_for('practice'))
+
+    return render_template('practice.html',
+                           front=front_content,
+                           additional=additional,
+                           mode=mode,
+                           current=current_index + 1,
+                           total=len(cards))
+
+# --- Route: Điều hướng qua card trước/sau (nếu muốn cho phép quay lại) ---
+@app.route('/practice/navigate/<direction>')
+def practice_navigate(direction):
+    practice_session = session.get('practice')
+    if not practice_session:
+        return redirect(url_for('practice_select'))
+
+    # Lấy chỉ số hiện tại từ key "current"
+    current = practice_session.get("current", 0)
+    questions = practice_session.get("questions", [])
+    if not questions:
+        return redirect(url_for('practice_select'))
+
+    if direction == "next":
+        practice_session["current"] = min(current + 1, len(questions) - 1)
+    elif direction == "prev":
+        practice_session["current"] = max(current - 1, 0)
+    else:
+        flash("Hướng điều hướng không hợp lệ.", "danger")
+        return redirect(url_for('practice'))
+
+    session['practice'] = practice_session
+    return redirect(url_for('practice'))
+
+
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)

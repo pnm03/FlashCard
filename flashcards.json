@@ -41,7 +41,7 @@
                             "ipa": "skæn",
                             "audio_auto": "/static/uploads/audio/scan.mp3?v=4336",
                             "audio_user": "",
-                            "mistake_count": 1
+                            "mistake_count": 2
                         },
                         {
                             "english": "gaze",
@@ -71,7 +71,7 @@
                             ],
                             "ipa": "hɛˈloʊ",
                             "image": "/static/uploads/unnamed.jpg",
-                            "mistake_count": 3
+                            "mistake_count": 4
                         }
                     ]
                 },
@@ -86,6 +86,54 @@
                             "ipa": "jʊr",
                             "image": "",
                             "audio_auto": "/static/uploads/audio/your.mp3?v=37647",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "mango",
+                            "description": "",
+                            "definitions": [
+                                "Xoài"
+                            ],
+                            "ipa": "ˈmæŋgoʊ",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/mango.mp3?v=77378",
+                            "audio_user": "/static/uploads/audio/mango_direct.mp3?v=71870",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "a",
+                            "description": "a",
+                            "definitions": [
+                                "a"
+                            ],
+                            "ipa": "ə",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/a.mp3?v=75352",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "a",
+                            "description": "",
+                            "definitions": [
+                                "a"
+                            ],
+                            "ipa": "ə",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/a.mp3?v=45103",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "thing",
+                            "description": "",
+                            "definitions": [
+                                "aa"
+                            ],
+                            "ipa": "θɪŋ",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/thing.mp3?v=6859",
                             "audio_user": "",
                             "mistake_count": 0
                         }
@@ -117,7 +165,8 @@
                             "description": "Mô tả cho Hoạt động của tay_word_2",
                             "english": "Hoạt động của tay_word_2",
                             "image": "",
-                            "ipa": "hoạt* độđộng* của* tay_word_2*"
+                            "ipa": "hoạt* độđộng* của* tay_word_2*",
+                            "mistake_count": 1
                         },
                         {
                             "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_3.mp3",
@@ -194,7 +243,8 @@
                             "description": "Mô tả cho Hoạt động của tay_word_9",
                             "english": "Hoạt động của tay_word_9",
                             "image": "",
-                            "ipa": "hoạt* độđộng* của* tay_word_9*"
+                            "ipa": "hoạt* độđộng* của* tay_word_9*",
+                            "mistake_count": 1
                         },
                         {
                             "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_10.mp3",
@@ -249,7 +299,8 @@
                             "description": "Mô tả cho Hoạt động của tay_word_14",
                             "english": "Hoạt động của tay_word_14",
                             "image": "",
-                            "ipa": "hoạt* độđộng* của* tay_word_14*"
+                            "ipa": "hoạt* độđộng* của* tay_word_14*",
+                            "mistake_count": 1
                         },
                         {
                             "audio_auto": "/static/uploads/audio/Hoat_ong_cua_tay_word_15.mp3",
@@ -261,6 +312,18 @@
                             "english": "Hoạt động của tay_word_15",
                             "image": "",
                             "ipa": "hoạt* độđộng* của* tay_word_15*"
+                        },
+                        {
+                            "english": "e",
+                            "description": "ee",
+                            "definitions": [
+                                "ee"
+                            ],
+                            "ipa": "i",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/e.mp3?v=19334",
+                            "audio_user": "",
+                            "mistake_count": 0
                         }
                     ]
                 }

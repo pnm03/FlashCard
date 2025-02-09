@@ -1,0 +1,6 @@
+Flask
+eng-to-ipa
+gTTS
+pyspellchecker
+requests
+gunicorn

@@ -1,79 +1,144 @@
 {% extends "base.html" %}
 {% block content %}
+<style>
+  /* Các ô nhập: input, textarea, select, file */
+  input[type="text"],
+  textarea,
+  select,
+  input[type="file"] {
+      font-size: 1.2em;
+      width: 100%;
+      border: 2px solid #000;
+      padding: 5px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      vertical-align: middle;
+  }
+  label {
+      font-size: 1.2em;
+      display: inline-block;
+      vertical-align: middle;
+      margin-bottom: 5px;
+  }
+  /* Button submit (Tạo Flashcard): full width, vuông vắn */
+  button.submit-btn {
+      font-size: 1.2em;
+      padding: 10px;
+      display: block;
+      width: 100%;
+      margin-top: 5px;
+  }
+  /* Các button trong phần ghi âm: đặt cạnh nhau */
+  #recording-section .record-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+  }
+  #recording-section .record-buttons button {
+      display: inline-block;
+      width: auto;
+  }
+  fieldset {
+      margin-bottom: 20px;
+  }
+</style>
+
 <h2>Tạo Flashcard Mới</h2>
 <form method="post" action="{{ url_for('create') }}" enctype="multipart/form-data" autocomplete="off">
     <fieldset>
         <legend>Khóa Lớn</legend>
         <label for="existing_big_deck">Chọn Khóa Lớn hiện có:</label>
-        <select id="existing_big_deck" name="existing_big_deck" style="font-size:1.2em; width:100%;">
+        <select id="existing_big_deck" name="existing_big_deck">
             <option value="">-- Chọn khóa lớn --</option>
             {% for deck in big_decks.keys() %}
-                <option value="{{ deck }}">{{ deck }}</option>
+                <option value="{{ deck }}" {% if deck == request.args.get('existing_big_deck', '') %}selected{% endif %}>
+                    {{ deck }}
+                </option>
             {% endfor %}
         </select>
-        <br><br>
+        <br>
         <label for="new_big_deck">Hoặc nhập tên Khóa Lớn mới:</label>
-        <input type="text" id="new_big_deck" name="new_big_deck" placeholder="Tên khóa lớn mới" autocomplete="off" style="font-size:1.2em; width:100%;">
+        <input type="text" id="new_big_deck" name="new_big_deck" placeholder="Tên khóa lớn mới"
+               autocomplete="off" value="{{ request.args.get('new_big_deck', '') }}">
     </fieldset>
     
     <fieldset>
         <legend>Khóa Nhỏ</legend>
         <label for="existing_sub_deck">Chọn Khóa Nhỏ hiện có:</label>
-        <select id="existing_sub_deck" name="existing_sub_deck" style="font-size:1.2em; width:100%;">
+        <select id="existing_sub_deck" name="existing_sub_deck">
             <option value="">-- Chọn khóa nhỏ --</option>
+            {% if request.args.get('existing_big_deck', '') and big_decks[request.args.get('existing_big_deck')].subdecks %}
+                {% for sub in big_decks[request.args.get('existing_big_deck')].subdecks.keys() %}
+                    <option value="{{ sub }}" {% if sub == request.args.get('existing_sub_deck', '') %}selected{% endif %}>
+                        {{ sub }}
+                    </option>
+                {% endfor %}
+            {% endif %}
         </select>
-        <br><br>
+        <br>
         <label for="new_sub_deck">Hoặc nhập tên Khóa Nhỏ mới:</label>
-        <input type="text" id="new_sub_deck" name="new_sub_deck" placeholder="Tên khóa nhỏ mới" autocomplete="off" style="font-size:1.2em; width:100%;">
+        <input type="text" id="new_sub_deck" name="new_sub_deck" placeholder="Tên khóa nhỏ mới"
+               autocomplete="off" value="{{ request.args.get('new_sub_deck', '') }}">
     </fieldset>
     
     <fieldset>
         <legend>Chi tiết Flashcard</legend>
         <label for="english">Từ Tiếng Anh:</label>
-        <input type="text" id="english" name="english" placeholder="Nhập từ tiếng Anh" autocomplete="off" style="font-size:1.2em; width:100%;">
+        <input type="text" id="english" name="english" placeholder="Nhập từ tiếng Anh" autocomplete="off">
         <span id="word-check-result" style="color: green; font-size:0.9em;"></span>
         <div id="word-suggestion" style="display:none; margin-top:5px;">
             <input type="text" id="suggestion_input" style="font-size:1.1em; width:80%;" readonly>
             <button type="button" id="accept_suggestion">Chấp nhận</button>
         </div>
-        <br><br>
+        <br>
         <label for="ipa">Phiên Âm IPA:</label>
-        <input type="text" id="ipa" name="ipa" placeholder="Nếu để trống, tự động điền" autocomplete="off" style="font-size:1.2em; width:100%;">
+        <input type="text" id="ipa" name="ipa" placeholder="Nếu để trống, tự động điền" autocomplete="off">
         <button type="button" id="gen-audio-btn">Tự sinh âm thanh</button>
-        <br><br>
+        <br>
         <label for="description">Mô tả:</label>
-        <textarea id="description" name="description" placeholder="Nhập mô tả" rows="3" autocomplete="off" style="font-size:1.2em; width:100%;"></textarea>
-        <br><br>
+        <textarea id="description" name="description" placeholder="Nhập mô tả" rows="3" autocomplete="off"></textarea>
+        <br>
         <label for="definitions">Định nghĩa (mỗi dòng một định nghĩa):</label>
-        <textarea id="definitions" name="definitions" placeholder="Nhập định nghĩa" rows="4" autocomplete="off" style="font-size:1.2em; width:100%;"></textarea>
-        <br><br>
+        <textarea id="definitions" name="definitions" placeholder="Nhập định nghĩa" rows="4" autocomplete="off"></textarea>
+        <br>
         <label for="image_file">Chọn ảnh từ máy:</label>
-        <input type="file" id="image_file" name="image_file" accept="image/*" style="font-size:1.2em; width:100%;">
-        <br><br>
+        <input type="file" id="image_file" name="image_file" accept="image/*">
+        <br>
         <label for="image">Hoặc nhập URL ảnh:</label>
-        <input type="text" id="image" name="image" placeholder="Nhập URL ảnh" autocomplete="off" style="font-size:1.2em; width:100%;">
+        <input type="text" id="image" name="image" placeholder="Nhập URL ảnh" autocomplete="off">
         <button type="button" id="gen-image-btn">Tự sinh hình ảnh</button>
-        <br><br>
+        <br>
         <label for="audio_file">Chọn file ghi âm (hoặc sử dụng ghi âm trực tiếp):</label>
-        <input type="file" id="audio_file" name="audio_file" accept="audio/*" style="font-size:1.2em; width:100%;">
-        <br><br>
-        <!-- Ghi âm trực tiếp -->
+        <input type="file" id="audio_file" name="audio_file" accept="audio/*">
+        <br>
+        <!-- Phần ghi âm trực tiếp -->
         <div id="recording-section">
           <p id="recording-status" style="color: red; display: none;">Đang ghi âm...</p>
-          <button type="button" id="start-record">Bắt đầu Ghi âm</button>
-          <button type="button" id="stop-record" disabled>Dừng Ghi âm</button>
-          <button type="button" id="clear-record" style="display:none;">X</button>
+          <div class="record-buttons">
+              <button type="button" id="start-record">Bắt đầu Ghi âm</button>
+              <button type="button" id="stop-record" disabled>Dừng Ghi âm</button>
+              <button type="button" id="clear-record" style="display:none;">X</button>
+          </div>
           <audio id="recorded-audio" controls style="display:none; margin-top:10px;"></audio>
           <input type="hidden" id="audio_blob" name="audio_blob">
         </div>
     </fieldset>
     
     <br>
-    <button type="submit" style="font-size:1.2em; padding:10px; width:100%;">Tạo Flashcard</button>
+    <button type="submit" class="submit-btn">Tạo Flashcard</button>
 </form>
 
 <script>
-    // Cập nhật dropdown khóa nhỏ khi chọn khóa lớn
+    // Khi nhấn Enter (ngoại trừ trong textarea) sẽ kích hoạt button submit
+    document.querySelector("form").addEventListener("keydown", function(e) {
+      if (e.key === "Enter" && e.target.tagName !== "TEXTAREA") {
+          e.preventDefault();
+          this.querySelector('button.submit-btn').click();
+      }
+    });
+
+    // --- CÁC SCRIPT HIỆN CÓ ---
+    // Cập nhật dropdown Khóa Nhỏ khi chọn Khóa Lớn
     const existingBigDeckSelect = document.getElementById('existing_big_deck');
     const newBigDeckInput = document.getElementById('new_big_deck');
     existingBigDeckSelect.addEventListener('change', function() {
@@ -98,7 +163,7 @@
         newSubDeckInput.disabled = this.value !== "";
     });
 
-    // Debounce function
+    // Debounce function (sử dụng cho kiểm tra từ, xử lý âm thanh, hình ảnh, ghi âm, …)
     function debounce(func, wait) {
       let timeout;
       return function(...args) {
@@ -107,7 +172,6 @@
       };
     }
 
-    // Kiểm tra từ qua API /check_word
     const englishInput = document.getElementById('english');
     const ipaInput = document.getElementById('ipa');
     const wordCheckResult = document.getElementById('word-check-result');
@@ -148,7 +212,6 @@
         checkWord();
     });
 
-    // Nút tự sinh âm thanh: tạo audio mới theo từ hiện tại
     const genAudioBtn = document.getElementById('gen-audio-btn');
     genAudioBtn.addEventListener('click', () => {
         const word = englishInput.value.trim();
@@ -167,7 +230,6 @@
           });
     });
 
-    // Nút tự sinh hình ảnh: lấy hình từ Unsplash qua API /generate_image
     const genImageBtn = document.getElementById('gen-image-btn');
     genImageBtn.addEventListener('click', () => {
         const word = englishInput.value.trim();
@@ -184,7 +246,6 @@
           .catch(err => console.error(err));
     });
 
-    // Ghi âm trực tiếp
     let mediaRecorder;
     let audioChunks = [];
     const startRecordBtn = document.getElementById('start-record');
@@ -195,6 +256,8 @@
     const recordingStatus = document.getElementById('recording-status');
 
     startRecordBtn.addEventListener('click', () => {
+        // Nếu đã bị disable (đang ghi âm) thì không làm gì
+        if(startRecordBtn.disabled) return;
         navigator.mediaDevices.getUserMedia({ audio: true })
           .then(stream => {
               mediaRecorder = new MediaRecorder(stream);
@@ -217,6 +280,7 @@
                       clearRecordBtn.style.display = "inline-block";
                   }
               });
+              // Khi bắt đầu ghi âm: disable button "Bắt đầu Ghi âm" và enable button "Dừng Ghi âm"
               startRecordBtn.disabled = true;
               stopRecordBtn.disabled = false;
           })
@@ -236,6 +300,22 @@
         recordedAudio.style.display = "none";
         audioBlobInput.value = "";
         clearRecordBtn.style.display = "none";
+    });
+
+    // Kiểm tra: Đảm bảo trường "Định nghĩa" không được để trống
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const definitionsField = document.getElementById('definitions');
+        if (!definitionsField.value.trim()) {
+            definitionsField.style.border = '2px solid red';
+            definitionsField.focus();
+            e.preventDefault(); // Ngăn form submit
+        }
+    });
+
+    document.getElementById('definitions').addEventListener('input', function() {
+        if (this.value.trim()) {
+            this.style.border = '';
+        }
     });
 </script>
 {% endblock %}
