@@ -21,16 +21,23 @@
     header nav a:hover {
       text-decoration: underline;
     }
+
+    /* Khi màn hình nhỏ (điện thoại), loại bỏ khoảng trống cho header mobile */
+    @media (max-width: 767px) {
+      header.d-block.d-md-none {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Header cho màn hình nhỏ:
-         - Logo Flashcard App nằm bên trái.
-         - Nút hamburger hiển thị icon màu trắng (sử dụng lớp navbar-dark).
-         Khi nhấn nút hamburger, menu collapse sẽ hiển thị danh sách các link điều hướng. -->
+    <!-- Header cho màn hình nhỏ: -->
+    <!-- Lưu ý: Đã giữ lớp my-3 trong HTML nhưng sẽ bị ghi đè khi màn hình nhỏ nhờ Media Query -->
     <header class="d-block d-md-none my-3">
-      <nav class="navbar navbar-dark bg-transparent">
+      <!-- Chuyển bg-transparent -> bg-dark để menu có màu đen -->
+      <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="{{ url_for('index') }}">Flashcard App</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileNavbar" 
                 aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,9 +68,7 @@
       </nav>
     </header>
 
-    <!-- Header cho màn hình lớn:
-         - Logo vẫn ở giữa.
-         - Các nút điều hướng được hiển thị phía dưới -->
+    <!-- Header cho màn hình lớn -->
     <header class="d-none d-md-block my-3">
       <h1 class="text-center">Flashcard App</h1>
       <nav class="text-center">
