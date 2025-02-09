@@ -725,24 +725,32 @@ def practice_navigate(direction):
 
 DATA_FILE = os.path.join(os.path.dirname(__file__), 'flashcards.json')
 
+EXPORT_FILE = r"E:\flashcard_web\flashcards.json"
+
 @app.route('/export_data')
 def export_data():
     try:
-        # Đọc dữ liệu từ file JSON
+        # Đọc dữ liệu từ file JSON gốc
         with open(DATA_FILE, 'r', encoding='utf-8') as f:
             data = json.load(f)
     except Exception as e:
-        return {"error": str(e)}, 500
+        return jsonify({"error": str(e)}), 500
 
-    # Chuyển dict thành chuỗi JSON có định dạng đẹp (indent)
+    # Chuyển đổi dữ liệu thành chuỗi JSON với định dạng đẹp (indent=4)
     json_str = json.dumps(data, ensure_ascii=False, indent=4)
 
-    # Tạo response với nội dung JSON, gợi ý trình duyệt tải file về
-    response = make_response(json_str)
-    response.headers['Content-Type'] = 'application/json'
-    response.headers['Content-Disposition'] = 'attachment; filename=export_data.json'
-    return response
+    try:
+        # Ghi chuỗi JSON vào file tại đường dẫn EXPORT_FILE
+        with open(EXPORT_FILE, 'w', encoding='utf-8') as f:
+            f.write(json_str)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
+    # Trả về thông báo thành công (bạn có thể tùy chỉnh giao diện response)
+    return jsonify({
+        "status": "success",
+        "message": f"Data exported successfully to {EXPORT_FILE}"
+    })
 
 if __name__ == '__main__':
     app.run(debug=True)

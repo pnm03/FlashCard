@@ -72,6 +72,18 @@
                             "ipa": "hɛˈloʊ",
                             "image": "/static/uploads/unnamed.jpg",
                             "mistake_count": 5
+                        },
+                        {
+                            "english": "cynic",
+                            "description": "",
+                            "definitions": [
+                                "aaaaa"
+                            ],
+                            "ipa": "ˈsɪnɪk",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/cynic.mp3?v=43530",
+                            "audio_user": "",
+                            "mistake_count": 0
                         }
                     ]
                 },
