@@ -9,14 +9,11 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <style>
-    /* Thiết lập style cho nav:
-       - Nền xanh dương (có thể thay đổi theo ý)
-       - Các link hiển thị chỉ chữ trắng, không có nền riêng */
-    
+    /* Giữ nguyên style cũ cho các link */
     header nav a {
       margin: 5px;
       display: inline-block;
-      color: white !important;  /* Ép chữ hiển thị màu trắng */
+      color: white !important;
       text-decoration: none;
       padding: 5px 10px;
       font-weight: 500;
@@ -28,7 +25,46 @@
 </head>
 <body>
   <div class="container">
-    <header class="my-3">
+    <!-- Header cho màn hình nhỏ:
+         - Logo Flashcard App nằm bên trái.
+         - Nút hamburger hiển thị icon màu trắng (sử dụng lớp navbar-dark).
+         Khi nhấn nút hamburger, menu collapse sẽ hiển thị danh sách các link điều hướng. -->
+    <header class="d-block d-md-none my-3">
+      <nav class="navbar navbar-dark bg-transparent">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Flashcard App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileNavbar" 
+                aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mobileNavbar">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('index') }}">Trang chủ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('create') }}">Tạo Flashcard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('practice_select') }}">Luyện tập</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('test_select') }}">Kiểm tra Flashcard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('list_courses') }}">Danh sách khóa học</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('generate') }}">Sinh Flashcard (AI)</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Header cho màn hình lớn:
+         - Logo vẫn ở giữa.
+         - Các nút điều hướng được hiển thị phía dưới -->
+    <header class="d-none d-md-block my-3">
       <h1 class="text-center">Flashcard App</h1>
       <nav class="text-center">
         <a href="{{ url_for('index') }}">Trang chủ</a>
@@ -39,6 +75,7 @@
         <a href="{{ url_for('generate') }}">Sinh Flashcard (AI)</a>
       </nav>
     </header>
+
     <main>
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
