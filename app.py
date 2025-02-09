@@ -1,10 +1,12 @@
 import json, os, random, unicodedata, base64
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify, make_response, jsonify
 from werkzeug.utils import secure_filename
 import eng_to_ipa as ipa_converter
 from gtts import gTTS
 from spellchecker import SpellChecker
 import requests
+import json
+import os
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'  # Thay đổi secret key cho phù hợp
@@ -720,6 +722,26 @@ def practice_navigate(direction):
 
     session['practice'] = practice_session
     return redirect(url_for('practice'))
+
+DATA_FILE = os.path.join(os.path.dirname(__file__), 'flashcards.json')
+
+@app.route('/export_data')
+def export_data():
+    try:
+        # Đọc dữ liệu từ file JSON
+        with open(DATA_FILE, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except Exception as e:
+        return {"error": str(e)}, 500
+
+    # Chuyển dict thành chuỗi JSON có định dạng đẹp (indent)
+    json_str = json.dumps(data, ensure_ascii=False, indent=4)
+
+    # Tạo response với nội dung JSON, gợi ý trình duyệt tải file về
+    response = make_response(json_str)
+    response.headers['Content-Type'] = 'application/json'
+    response.headers['Content-Disposition'] = 'attachment; filename=export_data.json'
+    return response
 
 
 if __name__ == '__main__':
