@@ -19,14 +19,14 @@
                             "mistake_count": 2
                         },
                         {
-                            "english": "glane",
+                            "english": "glance",
                             "definitions": [
                                 "nhìn lén"
                             ],
                             "image": "None",
                             "description": "",
-                            "ipa": "glane",
-                            "audio_auto": "/static/uploads/audio/glane.mp3?v=42383",
+                            "ipa": "glance",
+                            "audio_auto": "/static/uploads/audio/glance.mp3?v=94281",
                             "audio_user": "",
                             "mistake_count": 1
                         },
@@ -54,6 +54,261 @@
                             "ipa": "geɪz",
                             "audio_auto": "/static/uploads/audio/gaze.mp3?v=65837",
                             "audio_user": ""
+                        }
+                    ]
+                },
+                "Bài 2 - Từ vựng": {
+                    "cards": [
+                        {
+                            "english": "hold",
+                            "description": "",
+                            "definitions": [
+                                "Cầm",
+                                "Giữ"
+                            ],
+                            "ipa": "hoʊld",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/hold.mp3?v=68781",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "paint",
+                            "description": "",
+                            "definitions": [
+                                "Vẽ",
+                                "Sơn"
+                            ],
+                            "ipa": "peɪnt",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/paint.mp3?v=73376",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Carry",
+                            "description": "",
+                            "definitions": [
+                                "Mang",
+                                "Vác"
+                            ],
+                            "ipa": "ˈkɛri",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Carry.mp3?v=60006",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Push",
+                            "description": "",
+                            "definitions": [
+                                "Đẩy"
+                            ],
+                            "ipa": "pʊʃ",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Push.mp3?v=54957",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Pull",
+                            "description": "",
+                            "definitions": [
+                                "kéo"
+                            ],
+                            "ipa": "pʊl",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Pull.mp3?v=48849",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Reach",
+                            "description": "",
+                            "definitions": [
+                                "Với lấy"
+                            ],
+                            "ipa": "riʧ",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Reach.mp3?v=71421",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Type",
+                            "description": "",
+                            "definitions": [
+                                "Đánh máy"
+                            ],
+                            "ipa": "taɪp",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Type.mp3?v=45363",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "pick up",
+                            "description": "",
+                            "definitions": [
+                                "Nhặt lên",
+                                "nhặt lấy"
+                            ],
+                            "ipa": "ˈpɪˌkəp",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/pick_up.mp3?v=66728",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Pour",
+                            "description": "",
+                            "definitions": [
+                                "Rót",
+                                "Đổ"
+                            ],
+                            "ipa": "pɔr",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Pour.mp3?v=96596",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "wash",
+                            "description": "",
+                            "definitions": [
+                                "rửa tay"
+                            ],
+                            "ipa": "wɑʃ",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/wash.mp3?v=18746",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Lift",
+                            "description": "",
+                            "definitions": [
+                                "Nâng lên"
+                            ],
+                            "ipa": "lɪft",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Lift.mp3?v=27543",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "shake",
+                            "description": "",
+                            "definitions": [
+                                "Bắt tay"
+                            ],
+                            "ipa": "ʃeɪk",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/shake.mp3?v=344",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Clap",
+                            "description": "",
+                            "definitions": [
+                                "Vỗ tay"
+                            ],
+                            "ipa": "klæp",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Clap.mp3?v=99240",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        }
+                    ]
+                },
+                "Bài3 - Toeic": {
+                    "cards": [
+                        {
+                            "english": "jump",
+                            "description": "Nhảy cao",
+                            "definitions": [
+                                "Đứng"
+                            ],
+                            "ipa": "ʤəmp",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/jump.mp3?v=73568",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "stand",
+                            "description": "",
+                            "definitions": [
+                                "đứng"
+                            ],
+                            "ipa": "stænd",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/stand.mp3?v=77709",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "dance",
+                            "description": "",
+                            "definitions": [
+                                "nhảy múa"
+                            ],
+                            "ipa": "dæns",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/dance.mp3?v=55264",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "ride",
+                            "description": "",
+                            "definitions": [
+                                "lái xe",
+                                "cưỡi",
+                                "đi xe"
+                            ],
+                            "ipa": "raɪd",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/ride.mp3?v=67362",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "go up",
+                            "description": "",
+                            "definitions": [
+                                "Đi lên"
+                            ],
+                            "ipa": "goʊ əp",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/go_up.mp3?v=63415",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "hike",
+                            "description": "",
+                            "definitions": [
+                                "đi bộ đường dài"
+                            ],
+                            "ipa": "haɪk",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/hike.mp3?v=75252",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "climb",
+                            "description": "",
+                            "definitions": [
+                                "trèo"
+                            ],
+                            "ipa": "klaɪm",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/climb.mp3?v=79452",
+                            "audio_user": "",
+                            "mistake_count": 0
                         }
                     ]
                 }
