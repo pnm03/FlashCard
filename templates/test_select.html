@@ -89,7 +89,7 @@
         .then(data => {
           let options = '<option value="all">Tất cả</option>';
           data.subdecks.forEach(function(sub) {
-            options += `<option value="${sub}">${sub}</option>`;
+            options += `<option value="${sub.name}">${sub.name} (${sub.count} từ)</option>`;
           });
           subDeckSelect.innerHTML = options;
         })

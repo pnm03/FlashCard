@@ -115,11 +115,14 @@ def check_word():
 def get_subdecks():
     big_deck = request.args.get('big_deck', '').strip()
     data = load_data()
+    subdecks_info = []
     if big_deck in data:
-        subdecks = list(data[big_deck].get("subdecks", {}).keys())
-    else:
-        subdecks = []
-    return jsonify({"subdecks": subdecks})
+        for subdeck_name, subdeck_data in data[big_deck].get("subdecks", {}).items():
+            # Tính số từ trong khóa nhỏ dựa vào số thẻ (mảng cards)
+            card_count = len(subdeck_data.get("cards", []))
+            subdecks_info.append({"name": subdeck_name, "count": card_count})
+    return jsonify({"subdecks": subdecks_info})
+
 
 # ------------------------------
 @app.route('/')
@@ -751,6 +754,8 @@ def export_data():
         "status": "success",
         "message": f"Data exported successfully to {EXPORT_FILE}"
     })
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

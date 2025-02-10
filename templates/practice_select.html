@@ -101,7 +101,8 @@ document.addEventListener('DOMContentLoaded', function() {
           let options = '<option value="all">Tất cả</option>';
           if (data.subdecks && data.subdecks.length > 0) {
             data.subdecks.forEach(function(sub) {
-              options += `<option value="${sub}">${sub}</option>`;
+              // Hiển thị tên khóa nhỏ kèm theo số từ
+              options += `<option value="${sub.name}">${sub.name} (${sub.count} từ)</option>`;
             });
           } else {
             options = '<option value="all">Không có khóa nhỏ</option>';
