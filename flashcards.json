@@ -311,96 +311,102 @@
                             "mistake_count": 0
                         }
                     ]
-                }
-            }
-        },
-        "Test": {
-            "subdecks": {
-                "a": {
-                    "cards": [
-                        {
-                            "english": "Hello",
-                            "description": "abc",
-                            "definitions": [
-                                "hoihi"
-                            ],
-                            "ipa": "hɛˈloʊ",
-                            "image": "/static/uploads/unnamed.jpg",
-                            "mistake_count": 5
-                        },
-                        {
-                            "english": "cynic",
-                            "description": "",
-                            "definitions": [
-                                "aaaaa"
-                            ],
-                            "ipa": "ˈsɪnɪk",
-                            "image": "",
-                            "audio_auto": "/static/uploads/audio/cynic.mp3?v=43530",
-                            "audio_user": "",
-                            "mistake_count": 0
-                        }
-                    ]
                 },
-                "Test1": {
+                "Toeic - Danh từ (Các loại danh từ)": {
                     "cards": [
                         {
-                            "english": "your",
+                            "english": "happiness",
                             "description": "",
                             "definitions": [
-                                "bạn"
+                                "Hạnh phúc"
                             ],
-                            "ipa": "jʊr",
+                            "ipa": "ˈhæpinəs",
                             "image": "",
-                            "audio_auto": "/static/uploads/audio/your.mp3?v=37647",
-                            "audio_user": "",
-                            "mistake_count": 1
-                        },
-                        {
-                            "english": "mango",
-                            "description": "",
-                            "definitions": [
-                                "Xoài"
-                            ],
-                            "ipa": "ˈmæŋgoʊ",
-                            "image": "",
-                            "audio_auto": "/static/uploads/audio/mango.mp3?v=77378",
-                            "audio_user": "/static/uploads/audio/mango_direct.mp3?v=71870",
-                            "mistake_count": 0
-                        },
-                        {
-                            "english": "a",
-                            "description": "a",
-                            "definitions": [
-                                "a"
-                            ],
-                            "ipa": "ə",
-                            "image": "",
-                            "audio_auto": "/static/uploads/audio/a.mp3?v=75352",
+                            "audio_auto": "/static/uploads/audio/happiness.mp3?v=5945",
                             "audio_user": "",
                             "mistake_count": 0
                         },
                         {
-                            "english": "a",
+                            "english": "gratitude",
                             "description": "",
                             "definitions": [
-                                "a"
+                                "Sự biết ơn"
                             ],
-                            "ipa": "ə",
+                            "ipa": "ˈgrætəˌtud",
                             "image": "",
-                            "audio_auto": "/static/uploads/audio/a.mp3?v=45103",
+                            "audio_auto": "/static/uploads/audio/gratitude.mp3?v=81951",
                             "audio_user": "",
-                            "mistake_count": 2
+                            "mistake_count": 0
                         },
                         {
-                            "english": "thing",
+                            "english": "Kindness",
                             "description": "",
                             "definitions": [
-                                "aa"
+                                "Lòng tốt"
                             ],
-                            "ipa": "θɪŋ",
+                            "ipa": "ˈkaɪndnəs",
                             "image": "",
-                            "audio_auto": "/static/uploads/audio/thing.mp3?v=6859",
+                            "audio_auto": "/static/uploads/audio/Kindness.mp3?v=98638",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Feelings",
+                            "description": "",
+                            "definitions": [
+                                "Cảm xúc"
+                            ],
+                            "ipa": "ˈfilɪŋz",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Feelings.mp3?v=43211",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Qualities",
+                            "description": "",
+                            "definitions": [
+                                "Phẩm chất"
+                            ],
+                            "ipa": "kˈwɑlətiz",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Qualities.mp3?v=16590",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "ideals",
+                            "description": "",
+                            "definitions": [
+                                "Lý tưởng"
+                            ],
+                            "ipa": "aɪˈdilz",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/ideals.mp3?v=60423",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "concepts",
+                            "description": "",
+                            "definitions": [
+                                "Khái niệm"
+                            ],
+                            "ipa": "ˈkɑnsɛpts",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/concepts.mp3?v=98506",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "audience",
+                            "description": "",
+                            "definitions": [
+                                "khán giả"
+                            ],
+                            "ipa": "ˈɔdiəns",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/audience.mp3?v=13132",
                             "audio_user": "",
                             "mistake_count": 0
                         }
