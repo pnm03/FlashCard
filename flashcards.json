@@ -411,6 +411,97 @@
                             "mistake_count": 0
                         }
                     ]
+                },
+                "Toeic - Bài 4 - Các hoạt động khác": {
+                    "cards": [
+                        {
+                            "english": "Wear",
+                            "description": "",
+                            "definitions": [
+                                "Mặc"
+                            ],
+                            "ipa": "wɛr",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Wear.mp3?v=18892",
+                            "audio_user": "/static/uploads/audio/Wear_direct.mp3?v=56349",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Enter",
+                            "description": "",
+                            "definitions": [
+                                "đi vào",
+                                "tiến vào"
+                            ],
+                            "ipa": "ˈɛnər",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Enter.mp3?v=86579",
+                            "audio_user": "/static/uploads/audio/Enter_direct.mp3?v=53767",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Wait",
+                            "description": "",
+                            "definitions": [
+                                "Chờ đợi"
+                            ],
+                            "ipa": "weɪt",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Wait.mp3?v=66953",
+                            "audio_user": "/static/uploads/audio/Wait_direct.mp3?v=65852",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Lean",
+                            "description": "",
+                            "definitions": [
+                                "Cúi người",
+                                "Ngả người"
+                            ],
+                            "ipa": "lin",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Lean.mp3?v=80953",
+                            "audio_user": "/static/uploads/audio/Lean_direct.mp3?v=48821",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Lie",
+                            "description": "",
+                            "definitions": [
+                                "Nằm",
+                                "Nói dối"
+                            ],
+                            "ipa": "laɪ",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Lie.mp3?v=37876",
+                            "audio_user": "/static/uploads/audio/Lie_direct.mp3?v=24836",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Smile",
+                            "description": "",
+                            "definitions": [
+                                "Cười"
+                            ],
+                            "ipa": "smaɪl",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Smile.mp3?v=28527",
+                            "audio_user": "/static/uploads/audio/Smile_direct.mp3?v=48292",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Kiss",
+                            "description": "",
+                            "definitions": [
+                                "Hôn"
+                            ],
+                            "ipa": "kɪs",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Kiss.mp3?v=76120",
+                            "audio_user": "/static/uploads/audio/Kiss_direct.mp3?v=47752",
+                            "mistake_count": 0
+                        }
+                    ]
                 }
             }
         }
