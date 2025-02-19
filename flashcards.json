@@ -502,6 +502,265 @@
                             "mistake_count": 0
                         }
                     ]
+                },
+                "Toeic - Bài 5 - Tả cảnh": {
+                    "cards": [
+                        {
+                            "english": "Transportation",
+                            "description": "",
+                            "definitions": [
+                                "Giao thông",
+                                "vận tải"
+                            ],
+                            "ipa": "ˌtrænspərˈteɪʃən",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Transportation.mp3?v=41577",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Vehicle",
+                            "description": "",
+                            "definitions": [
+                                "Xe cộ",
+                                "Phương tiện"
+                            ],
+                            "ipa": "ˈviɪkəl",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Vehicle.mp3?v=79184",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Bicycle",
+                            "description": "",
+                            "definitions": [
+                                "Xe đạp"
+                            ],
+                            "ipa": "ˈbaɪsɪkəl",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Bicycle.mp3?v=47457",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Motorbike",
+                            "description": "",
+                            "definitions": [
+                                "Xe máy"
+                            ],
+                            "ipa": "ˈmoʊtərˌbaɪk",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Motorbike.mp3?v=93110",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Train",
+                            "description": "",
+                            "definitions": [
+                                "Tàu hỏa"
+                            ],
+                            "ipa": "treɪn",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Train.mp3?v=60627",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Boat",
+                            "description": "",
+                            "definitions": [
+                                "Thuyền"
+                            ],
+                            "ipa": "boʊt",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Boat.mp3?v=92487",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Ship",
+                            "description": "",
+                            "definitions": [
+                                "Tàu thủy"
+                            ],
+                            "ipa": "ʃɪp",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Ship.mp3?v=98872",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Airplane",
+                            "description": "",
+                            "definitions": [
+                                "Máy bay"
+                            ],
+                            "ipa": "ˈɛrˌpleɪn",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Airplane.mp3?v=51242",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        }
+                    ]
+                },
+                "Bài 6 - Nội thất và Cơ sở vật chất": {
+                    "cards": [
+                        {
+                            "english": "Drawer",
+                            "description": "",
+                            "definitions": [
+                                "Ngăn kéo"
+                            ],
+                            "ipa": "drɔr",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Drawer.mp3?v=59271",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Picture",
+                            "description": "",
+                            "definitions": [
+                                "Bức ảnh",
+                                "Ảnh"
+                            ],
+                            "ipa": "ˈpɪkʧər",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Picture.mp3?v=58291",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Printer",
+                            "description": "",
+                            "definitions": [
+                                "Máy in"
+                            ],
+                            "ipa": "ˈprɪnər",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Printer.mp3?v=15442",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Table lamp",
+                            "description": "",
+                            "definitions": [
+                                "Đèn để bàn"
+                            ],
+                            "ipa": "ˈteɪbəl læmp",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Table_lamp.mp3?v=1972",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Cabinet",
+                            "description": "",
+                            "definitions": [
+                                "Tủ nhiều ngăn"
+                            ],
+                            "ipa": "ˈkæbənət",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Cabinet.mp3?v=16764",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Ceiling light",
+                            "description": "",
+                            "definitions": [
+                                "Đền trần"
+                            ],
+                            "ipa": "ˈsilɪŋ laɪt",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Ceiling_light.mp3?v=25019",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        }
+                    ]
+                },
+                "Bài 7 - Hàng hóa chưng bày và vật chứa": {
+                    "cards": [
+                        {
+                            "english": "Merchandise",
+                            "description": "",
+                            "definitions": [
+                                "Hàng hóa"
+                            ],
+                            "ipa": "ˈmərʧənˌdaɪz",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Merchandise.mp3?v=50391",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Container",
+                            "description": "",
+                            "definitions": [
+                                "Dụng cụ chứa đựng",
+                                "Thùng chứa",
+                                "Thùng",
+                                "Vật chứa"
+                            ],
+                            "ipa": "kənˈteɪnər",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Container.mp3?v=11588",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Rack",
+                            "description": "",
+                            "definitions": [
+                                "Giá treo"
+                            ],
+                            "ipa": "ræk",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Rack.mp3?v=28646",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Basket",
+                            "description": "",
+                            "definitions": [
+                                "Rổ"
+                            ],
+                            "ipa": "ˈbæskət",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Basket.mp3?v=26329",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Shelf",
+                            "description": "",
+                            "definitions": [
+                                "Kệ",
+                                "Giá"
+                            ],
+                            "ipa": "ʃɛlf",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Shelf.mp3?v=40026",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "Dish",
+                            "description": "",
+                            "definitions": [
+                                "Đĩa"
+                            ],
+                            "ipa": "dɪʃ",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/Dish.mp3?v=95247",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        }
+                    ]
                 }
             }
         }
