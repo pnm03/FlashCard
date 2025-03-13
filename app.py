@@ -410,70 +410,116 @@ def generate_result():
         return redirect(url_for('list_courses'))
     return render_template('generate_result.html', generated=generated)
 
+@app.route('/get_words')
+def get_words():
+    big_deck = request.args.get('big_deck')
+    sub_decks = request.args.getlist('sub_deck')
+    data = load_data()
+    grouped_words = {}  # key: sub_deck, value: list các từ (english)
+    if big_deck == "all":
+        for bd, bd_data in data.items():
+            for sd, sd_data in bd_data.get("subdecks", {}).items():
+                for card in sd_data.get("cards", []):
+                    word = card.get("english", "")
+                    if word:
+                        if sd not in grouped_words:
+                            grouped_words[sd] = []
+                        if word not in grouped_words[sd]:
+                            grouped_words[sd].append(word)
+    else:
+        for sub in sub_decks:
+            for card in data.get(big_deck, {}).get("subdecks", {}).get(sub, {}).get("cards", []):
+                word = card.get("english", "")
+                if word:
+                    if sub not in grouped_words:
+                        grouped_words[sub] = []
+                    if word not in grouped_words[sub]:
+                        grouped_words[sub].append(word)
+    return jsonify({"grouped_words": grouped_words})
+
+
 @app.route('/test/select', methods=['GET', 'POST'])
 def test_select():
     data = load_data()
-    decks = []
-    for big_deck, bd_data in data.items():
-        subdecks = list(bd_data.get("subdecks", {}).keys())
-        decks.append({"big_deck": big_deck, "subdecks": subdecks})
+    # Tạo danh sách decks: mỗi deck gồm khóa lớn và danh sách các khóa nhỏ.
+    decks = [{"big_deck": big, "subdecks": list(bd_data.get("subdecks", {}).keys())} 
+             for big, bd_data in data.items()]
+
     if request.method == 'POST':
         selected_big = request.form.get('big_deck')
-        selected_sub = request.form.get('sub_deck')
-        try:
-            num_questions = int(request.form.get('num_questions'))
-        except:
-            num_questions = 5
+        selected_subs = request.form.getlist('sub_deck')  # Danh sách các khóa nhỏ được chọn
+        order_mode = request.form.get('order_mode', 'sequential')  # 'sequential' hoặc 'random'
+        
+        # Tạo danh sách flashcard kèm thông tin "big_deck", "sub_deck" và "card"
         flashcards = []
         if selected_big == "all":
             for bd, bd_data in data.items():
                 for sd, sd_data in bd_data.get("subdecks", {}).items():
                     for card in sd_data.get("cards", []):
-                        # Lưu kèm thông tin deck để dễ cập nhật mistake_count sau
-                        flashcards.append({"big_deck": bd, "sub_deck": sd, "card": card})
+                        flashcards.append({
+                            "big_deck": bd,
+                            "sub_deck": sd,
+                            "card": card
+                        })
         else:
-            bd_data = data.get(selected_big, {})
-            if selected_sub == "all":
-                for sd, sd_data in bd_data.get("subdecks", {}).items():
-                    for card in sd_data.get("cards", []):
-                        flashcards.append({"big_deck": selected_big, "sub_deck": sd, "card": card})
-            else:
-                for card in bd_data.get("subdecks", {}).get(selected_sub, {}).get("cards", []):
-                    flashcards.append({"big_deck": selected_big, "sub_deck": selected_sub, "card": card})
+            for sub in selected_subs:
+                for card in data[selected_big]["subdecks"].get(sub, {}).get("cards", []):
+                    flashcards.append({
+                        "big_deck": selected_big,
+                        "sub_deck": sub,
+                        "card": card
+                    })
 
+        # Lọc theo các từ được chọn (dựa trên trường "english")
+        selected_words = request.form.getlist('selected_word')
+        if selected_words:
+            flashcards = [fc for fc in flashcards if fc["card"].get("english") in selected_words]
+        
         if not flashcards:
-            flash("Không tìm thấy flashcard cho bộ đã chọn.", "danger")
+            flash("Không tìm thấy flashcard.", "danger")
             return redirect(url_for('test_select'))
-
-        # Gán cho mỗi flashcard một id duy nhất (dựa trên index trong danh sách)
-        for idx, item in enumerate(flashcards):
-            item['id'] = idx
-
+        
+        try:
+            num_questions = int(request.form.get('num_questions'))
+        except:
+            num_questions = len(flashcards)
+        
+        total_cards = len(flashcards)
+        questions_flashcards = []
+        if num_questions > total_cards:
+            # Nếu số câu hỏi > tổng flashcard:
+            if order_mode == 'random':
+                random.shuffle(flashcards)
+                questions_flashcards.extend(flashcards)
+            else:
+                questions_flashcards.extend(flashcards)
+            additional_count = num_questions - total_cards
+            for _ in range(additional_count):
+                questions_flashcards.append(random.choice(flashcards))
+        else:
+            if order_mode == 'random':
+                questions_flashcards = random.sample(flashcards, num_questions)
+            else:
+                questions_flashcards = flashcards[:num_questions]
+        
+        # Tạo danh sách câu hỏi với các trường cần thiết
         questions = []
-        card_usage = {}  # theo dõi số lần xuất hiện của mỗi flashcard (dựa trên id)
-
-        while len(questions) < num_questions:
-                # Chỉ chọn những flashcard mà chưa được dùng quá 2 lần
-                eligible = [item for item in flashcards if card_usage.get(item['id'], 0) < 2]
-                if not eligible:
-                    break  # Không còn flashcard đủ điều kiện, thoát vòng lặp
-                # Sử dụng trọng số dựa trên mistake_count (càng sai nhiều -> trọng số càng cao)
-                weights = [item['card'].get('mistake_count', 0) + 1 for item in eligible]
-                chosen = random.choices(eligible, weights=weights, k=1)[0]
-                card_usage[chosen['id']] = card_usage.get(chosen['id'], 0) + 1
-                mode = random.choice([1, 2])
-                questions.append({
-                    "big_deck": chosen["big_deck"],
-                    "sub_deck": chosen["sub_deck"],
-                    "card": chosen["card"],
-                    "mode": mode,
-                    "attempt": 0
-                })
-
-        # Lưu lại số câu hỏi thực tế tạo ra thay vì num_questions ban đầu
-        session['test'] = {"questions": questions, "current": 0, "score": 0, "total": len(questions)}
+        for fc in questions_flashcards:
+            questions.append({
+                "big_deck": fc["big_deck"],
+                "sub_deck": fc["sub_deck"],
+                "card": fc["card"],
+                "mode": random.choice([1, 2]),
+                "attempt": 0
+            })
+        
+        session['test'] = {"questions": questions, "current": 0, "score": 0, "total": num_questions}
         return redirect(url_for('test'))
+    
     return render_template('test_select.html', decks=decks)
+
+
+
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():

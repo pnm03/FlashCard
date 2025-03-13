@@ -1,100 +1,186 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- CSS tùy chỉnh -->
 <style>
-  .test-form-container {
-    max-width: 500px;
-    margin: 40px auto;
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  .container-flex {
+    display: flex;
   }
-  .test-form-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+  .left-panel, .right-panel {
+    flex: 1;
+    padding: 20px;
+  }
+  .right-panel {
+    border-left: 1px solid #ccc;
+    max-height: 600px;
+    overflow-y: auto;
   }
   .form-group {
     margin-bottom: 20px;
   }
-  .form-group label {
-    display: block;
+  .group-header {
     font-weight: bold;
-    margin-bottom: 5px;
-    color: #555;
-  }
-  .form-control {
-    width: 100%;
-    font-size: 1.2em;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  .submit-btn {
-    width: 100%;
-    font-size: 1.2em;
-    padding: 12px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    margin-bottom: 5px;
   }
-  .submit-btn:hover {
-    background-color: #218838;
+  .group-words {
+    margin-left: 20px;
+    margin-bottom: 10px;
   }
 </style>
 
-<div class="test-form-container">
-  <h2>Chọn Bộ Flashcard Kiểm Tra</h2>
-  <form method="post" action="{{ url_for('test_select') }}" autocomplete="off">
-    <div class="form-group">
-      <label for="big_deck">Chọn Khóa Lớn:</label>
-      <select id="big_deck" name="big_deck" class="form-control">
-        <option value="all">Tất cả</option>
-        {% for deck in decks %}
-          <option value="{{ deck.big_deck }}">{{ deck.big_deck }}</option>
-        {% endfor %}
-      </select>
+<form method="post" action="{{ url_for('test_select') }}" autocomplete="off" id="testForm">
+  <div class="container-flex">
+    <!-- Panel bên trái: Các ô chọn khóa, số câu hỏi, kiểu sắp xếp -->
+    <div class="left-panel">
+      <h2>Chọn Bộ Flashcard Kiểm Tra</h2>
+      <div class="form-group">
+        <label for="big_deck">Chọn Khóa Lớn:</label>
+        <select id="big_deck" name="big_deck" class="form-control">
+          <option value="all">Tất cả</option>
+          {% for deck in decks %}
+            <option value="{{ deck.big_deck }}">{{ deck.big_deck }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group" id="subdeck-container">
+        <label>Chọn Khóa Nhỏ:</label>
+        <div id="sub_deck_list">
+          <!-- Danh sách checkbox của sub_deck sẽ được load tại đây -->
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="num_questions">Số câu hỏi:</label>
+        <input type="number" id="num_questions" name="num_questions" min="1" value="5" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Chọn kiểu sắp xếp:</label>
+        <div>
+          <label><input type="radio" name="order_mode" value="sequential" checked> Không xáo trộn (lần lượt)</label>
+        </div>
+        <div>
+          <label><input type="radio" name="order_mode" value="random"> Xáo trộn (random)</label>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="sub_deck">Chọn Khóa Nhỏ:</label>
-      <select id="sub_deck" name="sub_deck" class="form-control">
-        <option value="all">Tất cả</option>
-      </select>
+    <!-- Panel bên phải: Danh sách từ (theo tiếng Anh) để người dùng tích chọn -->
+    <div class="right-panel" id="rightPanel">
+      <h3>Chọn từ muốn kiểm tra</h3>
+      <div id="word_list">
+        <!-- Danh sách từ sẽ được load ở đây -->
+      </div>
     </div>
-    <div class="form-group">
-      <label for="num_questions">Số câu hỏi:</label>
-      <input type="number" id="num_questions" name="num_questions" min="1" value="5" class="form-control">
-    </div>
-    <button type="submit" class="submit-btn">Bắt đầu Kiểm Tra</button>
-  </form>
-</div>
+  </div>
+  <button type="submit" class="submit-btn">Bắt đầu Kiểm Tra</button>
+</form>
 
-<!-- JavaScript cập nhật danh sách khóa nhỏ theo Khóa Lớn được chọn -->
 <script>
-  const bigDeckSelect = document.getElementById('big_deck');
-  const subDeckSelect = document.getElementById('sub_deck');
+  // Global state lưu trạng thái checkbox của từ và trạng thái ẩn/hiện của các nhóm
+  let wordCheckboxState = {}; // key: word, value: boolean (true: checked)
+  let groupToggleState = {};  // key: sub_deck, value: boolean (true: expanded, false: collapsed)
 
-  bigDeckSelect.addEventListener('change', function() {
-    const selectedBig = this.value;
+  // Khi chọn khóa lớn, load danh sách khóa nhỏ và cập nhật danh sách từ
+  document.getElementById('big_deck').addEventListener('change', function() {
+    let selectedBig = this.value;
+    let subDeckList = document.getElementById('sub_deck_list');
+    subDeckList.innerHTML = '';
     if (selectedBig === "all") {
-      subDeckSelect.innerHTML = '<option value="all">Tất cả</option>';
+      updateWordList();
     } else {
       fetch(`/get_subdecks?big_deck=${encodeURIComponent(selectedBig)}`)
         .then(response => response.json())
         .then(data => {
-          let options = '<option value="all">Tất cả</option>';
+          let html = '';
           data.subdecks.forEach(function(sub) {
-            options += `<option value="${sub.name}">${sub.name} (${sub.count} từ)</option>`;
+            html += `<label>
+                      <input type="checkbox" name="sub_deck" value="${sub.name}" onchange="updateWordList()"> 
+                      ${sub.name} (${sub.count} từ)
+                     </label><br>`;
           });
-          subDeckSelect.innerHTML = options;
+          subDeckList.innerHTML = html;
+          updateWordList();
         })
         .catch(err => console.error(err));
     }
   });
+  
+  // Hàm cập nhật danh sách từ dựa trên khóa lớn và các sub_deck đã được chọn
+  function updateWordList() {
+    let bigDeck = document.getElementById('big_deck').value;
+    let subDeckCheckboxes = document.querySelectorAll('input[name="sub_deck"]:checked');
+    let subDecks = [];
+    subDeckCheckboxes.forEach(cb => { subDecks.push(cb.value); });
+    
+    let wordListDiv = document.getElementById('word_list');
+    if (subDecks.length === 0) {
+      wordListDiv.innerHTML = '<p>Chưa chọn khóa nhỏ nào.</p>';
+      return;
+    }
+    
+    let params = new URLSearchParams();
+    params.append('big_deck', bigDeck);
+    subDecks.forEach(sd => { params.append('sub_deck', sd); });
+  
+    fetch(`/get_words?${params.toString()}`)
+      .then(response => response.json())
+      .then(data => {
+        let html = '';
+        if (data.grouped_words) {
+          for (let sub in data.grouped_words) {
+            if (data.grouped_words.hasOwnProperty(sub)) {
+              // Nếu trạng thái của nhóm chưa được thiết lập, mặc định collapsed (false)
+              if (!(sub in groupToggleState)) {
+                groupToggleState[sub] = false;
+              }
+              // Hiển thị header với biểu tượng toggle dựa theo trạng thái
+              html += `<div class="word-group">`;
+              html += `<div class="group-header" onclick="toggleGroup('${sub}')">${sub} <span id="toggle-icon-${sub}">${groupToggleState[sub] ? '[-]' : '[+]'}</span></div>`;
+              html += `<div class="group-words" id="group-words-${sub}" style="display: ${groupToggleState[sub] ? 'block' : 'none'};">`;
+              let words = data.grouped_words[sub];
+              words.forEach(word => {
+                // Kiểm tra trạng thái checkbox, mặc định true nếu chưa có
+                let defaultChecked = (word in wordCheckboxState) ? wordCheckboxState[word] : true;
+                let checked = defaultChecked ? 'checked' : '';
+                html += `<label><input type="checkbox" name="selected_word" value="${word}" onchange="updateWordState(this)" ${checked}> ${word}</label><br>`;
+              });
+              html += `</div></div>`;
+            }
+          }
+        } else {
+          html = '<p>Không có từ nào.</p>';
+        }
+        wordListDiv.innerHTML = html;
+      })
+      .catch(err => console.error(err));
+  }
+  
+  // Hàm cập nhật trạng thái của checkbox từ
+  function updateWordState(checkbox) {
+    wordCheckboxState[checkbox.value] = checkbox.checked;
+  }
+  
+  // Hàm toggle ẩn/hiện nhóm từ của một sub_deck
+  function toggleGroup(sub) {
+    groupToggleState[sub] = !groupToggleState[sub];
+    let groupWordsDiv = document.getElementById('group-words-' + sub);
+    let toggleIcon = document.getElementById('toggle-icon-' + sub);
+    if (groupToggleState[sub]) {
+      groupWordsDiv.style.display = 'block';
+      toggleIcon.textContent = '[-]';
+    } else {
+      groupWordsDiv.style.display = 'none';
+      toggleIcon.textContent = '[+]';
+    }
+  }
+  
+  // Khi checkbox của sub_deck thay đổi, cập nhật lại danh sách từ
+  document.addEventListener('change', function(e) {
+    if(e.target.name === 'sub_deck') {
+      updateWordList();
+    }
+  });
+  
+  // Cập nhật danh sách từ khi trang load
+  window.onload = function() {
+    updateWordList();
+  };
 </script>
 {% endblock %}
