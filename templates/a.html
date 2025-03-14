@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Đồ Dễ Thương - Sunny Girl</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --main-color: #FEF3C7; /* Vàng nhạt */
+            --accent-color: #FBCFE8; /* Hồng pastel */
+            --text-color: #4B5563;
+        }
+
+        * {
+            font-family: 'Quicksand', sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fff;
+            margin: 0;
+        }
+
+        /* Header */
+        .header {
+            background: var(--main-color);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #DB2777; /* Màu hồng đậm */
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .product-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 12px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+        }
+
+        .cart-open {
+            right: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr 1fr;
+                padding: 1rem;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">🌸 Sunny Girl</div>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Product Grid -->
+    <main class="products-grid">
+        <!-- Product Card Sample -->
+        <div class="product-card">
+            <img src="product1.jpg" alt="Ví dễ thương" class="product-image">
+            <div class="product-info">
+                <h3>Ví Hồng Đính Ngọc</h3>
+                <p class="price">299.000đ</p>
+                <button class="add-to-cart">Thêm vào giỏ</button>
+            </div>
+        </div>
+
+        <!-- Thêm các sản phẩm khác tại đây -->
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Giỏ hàng của bạn</h2>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items sẽ được thêm bằng JS -->
+        </div>
+        <div class="cart-total">
+            <p>Tổng cộng: <span>0đ</span></p>
+            <button class="checkout-btn">Thanh toán</button>
+        </div>
+    </div>
+
+    <script>
+        // Giỏ hàng logic
+        let cart = [];
+        
+        // Thêm vào giỏ hàng
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const productCard = button.closest('.product-card');
+                const product = {
+                    name: productCard.querySelector('h3').innerText,
+                    price: productCard.querySelector('.price').innerText,
+                    image: productCard.querySelector('img').src
+                };
+                
+                cart.push(product);
+                updateCartUI();
+            });
+        });
+
+        // Cập nhật giao diện giỏ hàng
+        function updateCartUI() {
+            document.querySelector('.cart-count').textContent = cart.length;
+            
+            const cartItems = document.querySelector('.cart-items');
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <h4>${item.name}</h4>
+                        <p>${item.price}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Mở/đóng giỏ hàng
+        document.querySelector('.cart-icon').addEventListener('click', () => {
+            document.querySelector('.cart-sidebar').classList.add('cart-open');
+        });
+
+        document.querySelector('.close-cart').addEventListener('click', () => {
+            document.querySelector('.cart-sidebar').classList.remove('cart-open');
+        });
+    </script>
+</body>
+</html>

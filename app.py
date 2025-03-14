@@ -441,7 +441,6 @@ def get_words():
 @app.route('/test/select', methods=['GET', 'POST'])
 def test_select():
     data = load_data()
-    # Tạo danh sách decks: mỗi deck gồm khóa lớn và danh sách các khóa nhỏ.
     decks = [{"big_deck": big, "subdecks": list(bd_data.get("subdecks", {}).keys())} 
              for big, bd_data in data.items()]
 
@@ -449,8 +448,9 @@ def test_select():
         selected_big = request.form.get('big_deck')
         selected_subs = request.form.getlist('sub_deck')  # Danh sách các khóa nhỏ được chọn
         order_mode = request.form.get('order_mode', 'sequential')  # 'sequential' hoặc 'random'
+        only_english = 'only_english' in request.form  # Kiểm tra checkbox có được chọn không
         
-        # Tạo danh sách flashcard kèm thông tin "big_deck", "sub_deck" và "card"
+        # Tạo danh sách flashcard
         flashcards = []
         if selected_big == "all":
             for bd, bd_data in data.items():
@@ -474,49 +474,44 @@ def test_select():
         selected_words = request.form.getlist('selected_word')
         if selected_words:
             flashcards = [fc for fc in flashcards if fc["card"].get("english") in selected_words]
-        
+
         if not flashcards:
             flash("Không tìm thấy flashcard.", "danger")
             return redirect(url_for('test_select'))
         
-        try:
-            num_questions = int(request.form.get('num_questions'))
-        except:
-            num_questions = len(flashcards)
-        
+        # Xác định số câu hỏi: gấp đôi tổng số từ
         total_cards = len(flashcards)
+        num_questions = total_cards * 2
+
         questions_flashcards = []
-        if num_questions > total_cards:
-            # Nếu số câu hỏi > tổng flashcard:
-            if order_mode == 'random':
-                random.shuffle(flashcards)
-                questions_flashcards.extend(flashcards)
-            else:
-                questions_flashcards.extend(flashcards)
-            additional_count = num_questions - total_cards
-            for _ in range(additional_count):
-                questions_flashcards.append(random.choice(flashcards))
-        else:
-            if order_mode == 'random':
-                questions_flashcards = random.sample(flashcards, num_questions)
-            else:
-                questions_flashcards = flashcards[:num_questions]
+        # Phần đầu tiên: lấy toàn bộ flashcard theo thứ tự ban đầu
+        questions_flashcards.extend(flashcards)
+        
+        # Phần bổ sung: chọn ngẫu nhiên từ danh sách có sẵn
+        additional_count = num_questions - total_cards
+        for _ in range(additional_count):
+            questions_flashcards.append(random.choice(flashcards))
         
         # Tạo danh sách câu hỏi với các trường cần thiết
         questions = []
         for fc in questions_flashcards:
-            questions.append({
+            question = {
                 "big_deck": fc["big_deck"],
                 "sub_deck": fc["sub_deck"],
                 "card": fc["card"],
-                "mode": random.choice([1, 2]),
                 "attempt": 0
-            })
-        
+            }
+            if only_english:
+                question["mode"] = "only_english"  # Chỉ nhập tiếng Anh, hiển thị Tiếng Việt
+            else:
+                question["mode"] = random.choice([1, 2])  # Chọn ngẫu nhiên 1 hoặc 2
+            questions.append(question)
+
         session['test'] = {"questions": questions, "current": 0, "score": 0, "total": num_questions}
         return redirect(url_for('test'))
     
     return render_template('test_select.html', decks=decks)
+
 
 
 

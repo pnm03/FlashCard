@@ -337,7 +337,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/gratitude.mp3?v=81951",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 1
                         },
                         {
                             "english": "Kindness",
@@ -349,7 +349,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Kindness.mp3?v=98638",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 1
                         },
                         {
                             "english": "Feelings",
@@ -361,7 +361,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Feelings.mp3?v=43211",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 1
                         },
                         {
                             "english": "Qualities",
@@ -373,7 +373,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Qualities.mp3?v=16590",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 1
                         },
                         {
                             "english": "ideals",
@@ -409,7 +409,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/audience.mp3?v=13132",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 1
                         }
                     ]
                 },
@@ -450,7 +450,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Wait.mp3?v=66953",
                             "audio_user": "/static/uploads/audio/Wait_direct.mp3?v=65852",
-                            "mistake_count": 0
+                            "mistake_count": 1
                         },
                         {
                             "english": "Lean",
@@ -463,7 +463,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Lean.mp3?v=80953",
                             "audio_user": "/static/uploads/audio/Lean_direct.mp3?v=48821",
-                            "mistake_count": 0
+                            "mistake_count": 2
                         },
                         {
                             "english": "Lie",
@@ -517,7 +517,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Transportation.mp3?v=41577",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 1
                         },
                         {
                             "english": "Vehicle",
@@ -542,7 +542,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Bicycle.mp3?v=47457",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 4
                         },
                         {
                             "english": "Motorbike",
@@ -554,7 +554,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Motorbike.mp3?v=93110",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 3
                         },
                         {
                             "english": "Train",
@@ -566,7 +566,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Train.mp3?v=60627",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 1
                         },
                         {
                             "english": "Boat",
@@ -590,7 +590,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Ship.mp3?v=98872",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 1
                         },
                         {
                             "english": "Airplane",
@@ -602,7 +602,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Airplane.mp3?v=51242",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 1
                         }
                     ]
                 },

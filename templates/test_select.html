@@ -16,15 +16,6 @@
   .form-group {
     margin-bottom: 20px;
   }
-  .group-header {
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 5px;
-  }
-  .group-words {
-    margin-left: 20px;
-    margin-bottom: 10px;
-  }
 </style>
 
 <form method="post" action="{{ url_for('test_select') }}" autocomplete="off" id="testForm">
@@ -60,6 +51,11 @@
           <label><input type="radio" name="order_mode" value="random"> Xáo trộn (random)</label>
         </div>
       </div>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="only_english" checked> Chỉ nhập Tiếng Anh (luôn hiển thị Tiếng Việt)
+        </label>
+      </div>
     </div>
     <!-- Panel bên phải: Danh sách từ (theo tiếng Anh) để người dùng tích chọn -->
     <div class="right-panel" id="rightPanel">
@@ -73,10 +69,6 @@
 </form>
 
 <script>
-  // Global state lưu trạng thái checkbox của từ và trạng thái ẩn/hiện của các nhóm
-  let wordCheckboxState = {}; // key: word, value: boolean (true: checked)
-  let groupToggleState = {};  // key: sub_deck, value: boolean (true: expanded, false: collapsed)
-
   // Khi chọn khóa lớn, load danh sách khóa nhỏ và cập nhật danh sách từ
   document.getElementById('big_deck').addEventListener('change', function() {
     let selectedBig = this.value;
@@ -101,84 +93,7 @@
         .catch(err => console.error(err));
     }
   });
-  
-  // Hàm cập nhật danh sách từ dựa trên khóa lớn và các sub_deck đã được chọn
-  function updateWordList() {
-    let bigDeck = document.getElementById('big_deck').value;
-    let subDeckCheckboxes = document.querySelectorAll('input[name="sub_deck"]:checked');
-    let subDecks = [];
-    subDeckCheckboxes.forEach(cb => { subDecks.push(cb.value); });
-    
-    let wordListDiv = document.getElementById('word_list');
-    if (subDecks.length === 0) {
-      wordListDiv.innerHTML = '<p>Chưa chọn khóa nhỏ nào.</p>';
-      return;
-    }
-    
-    let params = new URLSearchParams();
-    params.append('big_deck', bigDeck);
-    subDecks.forEach(sd => { params.append('sub_deck', sd); });
-  
-    fetch(`/get_words?${params.toString()}`)
-      .then(response => response.json())
-      .then(data => {
-        let html = '';
-        if (data.grouped_words) {
-          for (let sub in data.grouped_words) {
-            if (data.grouped_words.hasOwnProperty(sub)) {
-              // Nếu trạng thái của nhóm chưa được thiết lập, mặc định collapsed (false)
-              if (!(sub in groupToggleState)) {
-                groupToggleState[sub] = false;
-              }
-              // Hiển thị header với biểu tượng toggle dựa theo trạng thái
-              html += `<div class="word-group">`;
-              html += `<div class="group-header" onclick="toggleGroup('${sub}')">${sub} <span id="toggle-icon-${sub}">${groupToggleState[sub] ? '[-]' : '[+]'}</span></div>`;
-              html += `<div class="group-words" id="group-words-${sub}" style="display: ${groupToggleState[sub] ? 'block' : 'none'};">`;
-              let words = data.grouped_words[sub];
-              words.forEach(word => {
-                // Kiểm tra trạng thái checkbox, mặc định true nếu chưa có
-                let defaultChecked = (word in wordCheckboxState) ? wordCheckboxState[word] : true;
-                let checked = defaultChecked ? 'checked' : '';
-                html += `<label><input type="checkbox" name="selected_word" value="${word}" onchange="updateWordState(this)" ${checked}> ${word}</label><br>`;
-              });
-              html += `</div></div>`;
-            }
-          }
-        } else {
-          html = '<p>Không có từ nào.</p>';
-        }
-        wordListDiv.innerHTML = html;
-      })
-      .catch(err => console.error(err));
-  }
-  
-  // Hàm cập nhật trạng thái của checkbox từ
-  function updateWordState(checkbox) {
-    wordCheckboxState[checkbox.value] = checkbox.checked;
-  }
-  
-  // Hàm toggle ẩn/hiện nhóm từ của một sub_deck
-  function toggleGroup(sub) {
-    groupToggleState[sub] = !groupToggleState[sub];
-    let groupWordsDiv = document.getElementById('group-words-' + sub);
-    let toggleIcon = document.getElementById('toggle-icon-' + sub);
-    if (groupToggleState[sub]) {
-      groupWordsDiv.style.display = 'block';
-      toggleIcon.textContent = '[-]';
-    } else {
-      groupWordsDiv.style.display = 'none';
-      toggleIcon.textContent = '[+]';
-    }
-  }
-  
-  // Khi checkbox của sub_deck thay đổi, cập nhật lại danh sách từ
-  document.addEventListener('change', function(e) {
-    if(e.target.name === 'sub_deck') {
-      updateWordList();
-    }
-  });
-  
-  // Cập nhật danh sách từ khi trang load
+
   window.onload = function() {
     updateWordList();
   };
