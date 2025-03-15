@@ -602,7 +602,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Airplane.mp3?v=51242",
                             "audio_user": "",
-                            "mistake_count": 1
+                            "mistake_count": 2
                         }
                     ]
                 },
@@ -655,7 +655,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Table_lamp.mp3?v=1972",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 1
                         },
                         {
                             "english": "Cabinet",
@@ -695,7 +695,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Merchandise.mp3?v=50391",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 1
                         },
                         {
                             "english": "Container",
@@ -747,7 +747,7 @@
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Shelf.mp3?v=40026",
                             "audio_user": "",
-                            "mistake_count": 0
+                            "mistake_count": 1
                         },
                         {
                             "english": "Dish",
@@ -758,6 +758,123 @@
                             "ipa": "dɪʃ",
                             "image": "",
                             "audio_auto": "/static/uploads/audio/Dish.mp3?v=95247",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        }
+                    ]
+                },
+                "Bài 8 - Công cụ trang trí hoa và cây trồng": {
+                    "cards": [
+                        {
+                            "english": "plant",
+                            "description": "",
+                            "definitions": [
+                                "cây cảnh"
+                            ],
+                            "ipa": "plænt",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/plant.mp3?v=10330",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "grass",
+                            "description": "",
+                            "definitions": [
+                                "cỏ"
+                            ],
+                            "ipa": "græs",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/grass.mp3?v=67907",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "crop",
+                            "description": "",
+                            "definitions": [
+                                "cây trồng"
+                            ],
+                            "ipa": "krɑp",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/crop.mp3?v=75401",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "vase",
+                            "description": "",
+                            "definitions": [
+                                "Bình hoa"
+                            ],
+                            "ipa": "vɑz",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/vase.mp3?v=99121",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "ladder",
+                            "description": "",
+                            "definitions": [
+                                "chiếc thang",
+                                "thang"
+                            ],
+                            "ipa": "ˈlædər",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/ladder.mp3?v=52213",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "hammer",
+                            "description": "",
+                            "definitions": [
+                                "chiếc búa",
+                                "búa"
+                            ],
+                            "ipa": "ˈhæmər",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/hammer.mp3?v=13427",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "nail",
+                            "description": "",
+                            "definitions": [
+                                "chiếc đinh",
+                                "đinh"
+                            ],
+                            "ipa": "neɪl",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/nail.mp3?v=18621",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "cord",
+                            "description": "",
+                            "definitions": [
+                                "dây điện",
+                                "chiếc dây"
+                            ],
+                            "ipa": "kɔrd",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/cord.mp3?v=58280",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "machine",
+                            "description": "",
+                            "definitions": [
+                                "máy móc",
+                                "máy"
+                            ],
+                            "ipa": "məˈʃin",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/machine.mp3?v=32401",
                             "audio_user": "",
                             "mistake_count": 0
                         }
