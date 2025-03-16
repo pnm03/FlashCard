@@ -879,6 +879,148 @@
                             "mistake_count": 0
                         }
                     ]
+                },
+                "Bài 9 - Tả cảnh và quá khứ phân từ 1": {
+                    "cards": [
+                        {
+                            "english": "parked",
+                            "description": "",
+                            "definitions": [
+                                "được đỗ",
+                                "được đậu",
+                                "đã đỗ xe",
+                                "đã đậu xe"
+                            ],
+                            "ipa": "pɑrkt",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/parked.mp3?v=78726",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "arranged",
+                            "description": "",
+                            "definitions": [
+                                "được sắp xếp",
+                                "đã sắp xếp"
+                            ],
+                            "ipa": "əreɪnʤd",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/arranged.mp3?v=84428",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "placed",
+                            "description": "",
+                            "definitions": [
+                                "được đặt",
+                                "đã đặt xuống"
+                            ],
+                            "ipa": "pleɪst",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/placed.mp3?v=93617",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "unoccupied",
+                            "description": "",
+                            "definitions": [
+                                "được bỏ trống",
+                                "đã bỏ trống"
+                            ],
+                            "ipa": "əˈnɑkjəˌpaɪd",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/unoccupied.mp3?v=28844",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "hung",
+                            "description": "",
+                            "definitions": [
+                                "được treo",
+                                "đã treo"
+                            ],
+                            "ipa": "həŋ",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/hung.mp3?v=45161",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "displayed",
+                            "description": "",
+                            "definitions": [
+                                "đã hiển thị",
+                                "được trưng bày",
+                                "đã trưng bày",
+                                "đã hiển thị"
+                            ],
+                            "ipa": "dɪˈspleɪd",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/displayed.mp3?v=89913",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "stacked",
+                            "description": "",
+                            "definitions": [
+                                "được xếp đống",
+                                "được xếp chồng",
+                                "đã xếp chồng",
+                                "đã xếp đống"
+                            ],
+                            "ipa": "stækt",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/stacked.mp3?v=79107",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "attached",
+                            "description": "",
+                            "definitions": [
+                                "được đánh nhãn",
+                                "được đính nhãn",
+                                "đã đánh nhãn",
+                                "đánh nhãn"
+                            ],
+                            "ipa": "əˈtæʧt",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/attached.mp3?v=47121",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "connected",
+                            "description": "",
+                            "definitions": [
+                                "được kết nối",
+                                "đã kết nối"
+                            ],
+                            "ipa": "kəˈnɛktɪd",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/connected.mp3?v=48249",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        },
+                        {
+                            "english": "piled up",
+                            "description": "",
+                            "definitions": [
+                                "được chất đồng",
+                                "đã chất đống"
+                            ],
+                            "ipa": "paɪld up",
+                            "image": "",
+                            "audio_auto": "/static/uploads/audio/piled_up.mp3?v=81743",
+                            "audio_user": "",
+                            "mistake_count": 0
+                        }
+                    ]
                 }
             }
         }
